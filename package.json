@@ -2,7 +2,7 @@
   "name": "modern-player-management",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://Modern-Player-Management.github.io/web-frontend",
+  "homepage": "https://modern-player-management.github.io/web-frontend/",
   "dependencies": {
     "@material-ui/core": "^4.9.14",
     "@material-ui/icons": "^4.9.1",
