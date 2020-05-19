@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import Form from "react-validation/build/form";
 import CheckButton from "react-validation/build/button";
-import {isEmail} from "validator";
+/* import {isEmail} from "validator"; */
 
 import AuthService from "../services/auth.service";
 import Grid from "@material-ui/core/Grid";
