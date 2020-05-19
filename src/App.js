@@ -78,14 +78,14 @@ class App extends Component {
 
                             {currentUser ? (
                                 <>
-                                <Button href={"/teams"} color="inherit">Teams</Button>
-                                <Button href={"/profile"} color="inherit">{currentUser.username}</Button>
-                                <Button href={"/login"} onClick={this.logOut}  color="inherit">LogOut</Button>
+                                <Button href={"/web-frontend/teams"} color="inherit">Teams</Button>
+                                <Button href={"/web-frontend/profile"} color="inherit">{currentUser.username}</Button>
+                                <Button href={"/web-frontend/login"} onClick={this.logOut}  color="inherit">LogOut</Button>
                                 </>
                             ) : (
                                 <>
-                                    <Button href={"/login"} color="inherit">Login</Button>
-                                    <Button href={"/register"} color="inherit">Sign Up</Button>
+                                    <Button href={"/web-frontend/login"} color="inherit">Login</Button>
+                                    <Button href={"/web-frontend/register"} color="inherit">Sign Up</Button>
                                 </>
                             )}
 
@@ -95,12 +95,12 @@ class App extends Component {
 
                     <div className="container mt-3">
                         <Switch>
-                            <Route exact path={["/", "/home"]} component={Home}/>
-                            <Route exact path="/login" component={Login}/>
-                            <Route exact path="/register" component={Register}/>
-                            <Route exact path="/profile" component={Profile}/>
-                            <Route path="/user" component={BoardUser}/>
-                            <Route path="/teams" component={BoardTeams}/>
+                            <Route exact path={["/web-frontend/", "/web-frontend/home"]} component={Home}/>
+                            <Route exact path="/web-frontend/login" component={Login}/>
+                            <Route exact path="/web-frontend/register" component={Register}/>
+                            <Route exact path="/web-frontend/profile" component={Profile}/>
+                            <Route path="/web-frontend/user" component={BoardUser}/>
+                            <Route path="/web-frontend/teams" component={BoardTeams}/>
                         </Switch>
                     </div>
                 </MuiThemeProvider>
