@@ -49,7 +49,11 @@ export default function CardTeams(props) {
             <CardContent>
                 <Typography variant="body2" color="textSecondary" component="p">
                     {
-                        props.team.members.length === 0 ? "There is no member..." : props.team.members
+                        props.team.members.length !== 0 ?  props.team.members.map((member, index) => {
+                            return (
+                                member.username
+                            )
+                        }):"There is no member..."
                     }
                 </Typography>
             </CardContent>

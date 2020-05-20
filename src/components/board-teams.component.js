@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 
 import UserService from "../services/user.service";
 import Grid from "@material-ui/core/Grid";
@@ -8,9 +8,9 @@ import Alert from "@material-ui/lab/Alert";
 import Button from "@material-ui/core/Button";
 import CheckButton from "react-validation/build/button";
 import ResponsiveContainerGrid from "./ResponsiveContainer.component";
-import {withStyles} from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
 import CardTeams from "./CardTeams.component";
-import {Typography} from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 
 
 const useStyles = (theme) => ({
@@ -44,6 +44,7 @@ class BoardTeams extends Component {
     componentDidMount() {
         UserService.getTeamsBoard().then(
             response => {
+                console.log(response.data);
                 this.setState({
                     content: response.data
                 });
@@ -105,7 +106,7 @@ class BoardTeams extends Component {
     }
 
     render() {
-        const {classes} = this.props;
+        const { classes } = this.props;
         return (
             <>
 
@@ -113,13 +114,13 @@ class BoardTeams extends Component {
                     Your teams list:
                 </Typography>
                 <ResponsiveContainerGrid>
-                {
-                    this.state.content && this.state.content.map((team, index) => {
-                        return (
-                            <CardTeams key={index} team={team}/>
-                        )
-                    })
-                }
+                    {
+                        this.state.content && this.state.content.map((team, index) => {
+                            return (
+                                <CardTeams key={index} team={team} />
+                            )
+                        })
+                    }
 
                     <Grid item xs={12} sm={6}>
 
@@ -154,7 +155,7 @@ class BoardTeams extends Component {
                             > Create </Button>
 
                             <CheckButton
-                                style={{display: "none"}}
+                                style={{ display: "none" }}
                                 ref={c => {
                                     this.checkBtn = c;
                                 }}

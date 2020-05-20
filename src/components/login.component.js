@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import Form from "react-validation/build/form";
 import CheckButton from "react-validation/build/button";
 
@@ -6,7 +6,7 @@ import AuthService from "../services/auth.service";
 import Button from "@material-ui/core/Button";
 import Alert from '@material-ui/lab/Alert';
 import TextField from "@material-ui/core/TextField";
-import {withStyles} from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import Grid from "@material-ui/core/Grid";
 import ResponsiveContainerGrid from "./ResponsiveContainer.component";
 
@@ -89,7 +89,7 @@ class Login extends Component {
     }
 
     render() {
-        const {classes} = this.props;
+        const { classes } = this.props;
 
 
         return (
@@ -140,7 +140,7 @@ class Login extends Component {
                         > Login </Button>
 
                         <CheckButton
-                            style={{display: "none"}}
+                            style={{ display: "none" }}
                             ref={c => {
                                 this.checkBtn = c;
                             }}

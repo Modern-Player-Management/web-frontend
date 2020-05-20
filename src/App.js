@@ -1,5 +1,5 @@
-import React, {Component} from "react";
-import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import React, { Component } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 import "./App.css";
@@ -15,7 +15,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import {withStyles} from '@material-ui/styles';
+import { withStyles } from '@material-ui/styles';
 import BoardTeams from "./components/board-teams.component";
 
 const useStyles = (theme) => ({
@@ -30,7 +30,7 @@ const useStyles = (theme) => ({
 
 const theme = createMuiTheme({
     palette: {
-        primary:{
+        primary: {
             main: '#4a8fd4'
         },
         secondary: {
@@ -65,8 +65,8 @@ class App extends Component {
     }
 
     render() {
-        const {classes} = this.props;
-        const {currentUser} = this.state;
+        const { classes } = this.props;
+        const { currentUser } = this.state;
         return (
             <Router>
                 <MuiThemeProvider theme={theme}>
@@ -78,16 +78,16 @@ class App extends Component {
 
                             {currentUser ? (
                                 <>
-                                <Button href={"/teams"} color="inherit">Teams</Button>
-                                <Button href={"/profile"} color="inherit">{currentUser.username}</Button>
-                                <Button href={"/login"} onClick={this.logOut}  color="inherit">LogOut</Button>
+                                    <Button href={"/teams"} color="inherit">Teams</Button>
+                                    <Button href={"/profile"} color="inherit">{currentUser.username}</Button>
+                                    <Button href={"/login"} onClick={this.logOut} color="inherit">LogOut</Button>
                                 </>
                             ) : (
-                                <>
-                                    <Button href={"/login"} color="inherit">Login</Button>
-                                    <Button href={"/register"} color="inherit">Sign Up</Button>
-                                </>
-                            )}
+                                    <>
+                                        <Button href={"/login"} color="inherit">Login</Button>
+                                        <Button href={"/register"} color="inherit">Sign Up</Button>
+                                    </>
+                                )}
 
 
                         </Toolbar>
@@ -95,12 +95,12 @@ class App extends Component {
 
                     <div className="container mt-3">
                         <Switch>
-                            <Route exact path={["/", "/home"]} component={Home}/>
-                            <Route exact path="/login" component={Login}/>
-                            <Route exact path="/register" component={Register}/>
-                            <Route exact path="/profile" component={Profile}/>
-                            <Route path="/user" component={BoardUser}/>
-                            <Route path="/teams" component={BoardTeams}/>
+                            <Route exact path={["/", "/home"]} component={Home} />
+                            <Route exact path="/login" component={Login} />
+                            <Route exact path="/register" component={Register} />
+                            <Route exact path="/profile" component={Profile} />
+                            <Route path="/user" component={BoardUser} />
+                            <Route path="/teams" component={BoardTeams} />
                         </Switch>
                     </div>
                 </MuiThemeProvider>
