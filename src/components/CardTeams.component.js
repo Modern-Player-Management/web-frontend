@@ -6,16 +6,24 @@ import Typography from "@material-ui/core/Typography";
 import React from "react";
 import CardActions from "@material-ui/core/CardActions";
 import Button from "@material-ui/core/Button";
-import CardActionArea from "@material-ui/core/CardActionArea";
+import Modal from "@material-ui/core/Modal";
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        maxWidth: 345,
+        maxWidth: '26.5vh',
         margin: '8px',
     },
     media: {
         height: 0,
         paddingTop: '56.25%', // 16:9
+    },
+    paper: {
+        position: 'absolute',
+        width: 400,
+        backgroundColor: theme.palette.background.paper,
+        border: '2px solid #000',
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing(2, 4, 3),
     },
 }));
 
@@ -23,38 +31,68 @@ const useStyles = makeStyles((theme) => ({
 export default function CardTeams(props) {
     const classes = useStyles();
 
+    const [open, setOpen] = React.useState(false);
+
+    const handleOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+
     return (
         <Card className={classes.root}>
-            <CardActionArea>
-                <CardHeader
-                    title={props.team.name}
-                    subheader={props.team.manager.username}
-                />
-                {/*             <CardMedia
+            <CardHeader
+                title={props.team.name}
+                subheader={props.team.manager.username}
+            />
+            {/*             <CardMedia
                 className={classes.media}
                 image="/static/images/cards/paella.jpg"
                 title={props.team.name}
             /> */}
-                <CardContent>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                        {
-                            props.team.members.length !== 0 ? props.team.members.map((member, index) => {
-                                return (
-                                    member.username
-                                )
-                            }) : "There is no member..."
-                        }
-                    </Typography>
-                </CardContent>
-            </CardActionArea>
+            <CardContent>
+                desc
+            </CardContent>
             <CardActions>
-                <Button size="small" color="primary">
-                    Share
-        </Button>
+                <Button size="small" color="primary" onClick={handleOpen}>
+                    {props.team.members.length }
+                    {props.team.members.length ? " Members" : " Member"}
+                </Button>
+                <Modal
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="simple-modal-title"
+                    aria-describedby="simple-modal-description"
+                >
+                    <MembersList paper={classes.paper} members={props.team.members}/>
+                </Modal>
+
                 <Button size="small" color="primary">
                     Learn More
-        </Button>
+                </Button>
             </CardActions>
         </Card>
+    )
+}
+
+function MembersList(props) {
+    return (
+        <div className={props.paper}>
+            <h2 id="simple-modal-title">Members list</h2>
+            <Typography variant="body2" color="textSecondary" component="p">
+                {
+                    props.members.length !== 0 ? props.members.map((member, index) => {
+                        return (
+                            member.username
+                        )
+                    }) : "There is no member..."
+                }
+            </Typography>
+
+            Invite member
+        </div>
     )
 }
