@@ -91,7 +91,6 @@ function MembersList(props) {
                     }) : "There is no member..."
                 }
             </Typography>
-
             Invite member
         </div>
     )
