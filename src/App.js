@@ -16,7 +16,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { withStyles } from '@material-ui/styles';
-import BoardTeams from "./components/board-teams.component";
+import BoardTeams from "./components/teams/Board.component";
 
 const useStyles = (theme) => ({
     root: {

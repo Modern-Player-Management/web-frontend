@@ -7,6 +7,7 @@ import React from "react";
 import CardActions from "@material-ui/core/CardActions";
 import Button from "@material-ui/core/Button";
 import Modal from "@material-ui/core/Modal";
+import AddMembers from "./AddMembers.component";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -67,7 +68,7 @@ export default function CardTeams(props) {
                     aria-labelledby="simple-modal-title"
                     aria-describedby="simple-modal-description"
                 >
-                    <MembersList paper={classes.paper} members={props.team.members}/>
+                    <MembersList paper={classes.paper} teams={props.team}/>
                 </Modal>
 
                 <Button size="small" color="primary">
@@ -84,14 +85,14 @@ function MembersList(props) {
             <h2 id="simple-modal-title">Members list</h2>
             <Typography variant="body2" color="textSecondary" component="p">
                 {
-                    props.members.length !== 0 ? props.members.map((member, index) => {
+                    props.teams.members.length !== 0 ? props.teams.members.map((member, index) => {
                         return (
                             member.username
                         )
                     }) : "There is no member..."
                 }
             </Typography>
-            Invite member
+            <AddMembers teamid={props.teams.id}/>
         </div>
     )
 }

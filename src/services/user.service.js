@@ -23,6 +23,14 @@ class UserService {
         )
             ;
     }
+
+    addMemberToTeam(teamID, memberName) {
+        return axios.post(API_URL + 'api/Teams/'+teamID+'/player', {username: memberName}, {
+                headers: authHeader(),
+            }
+        )
+            ;
+    }
 }
 
 export default new UserService();

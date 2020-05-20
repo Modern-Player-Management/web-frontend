@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 
-import UserService from "../services/user.service";
+import UserService from "../../services/user.service";
 import Grid from "@material-ui/core/Grid";
 import Form from "react-validation/build/form";
 import TextField from "@material-ui/core/TextField";
 import Alert from "@material-ui/lab/Alert";
 import Button from "@material-ui/core/Button";
 import CheckButton from "react-validation/build/button";
-import ResponsiveContainerGrid from "./ResponsiveContainer.component";
+import ResponsiveContainerGrid from "../ResponsiveContainer.component";
 import { withStyles } from "@material-ui/core/styles";
 import CardTeams from "./CardTeams.component";
 import { Typography } from "@material-ui/core";
