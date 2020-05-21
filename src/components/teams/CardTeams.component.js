@@ -59,8 +59,8 @@ export default function CardTeams(props) {
             </CardContent>
             <CardActions>
                 <Button size="small" color="primary" onClick={handleOpen}>
-                    {props.team.members.length }
-                    {props.team.members.length ? " Members" : " Member"}
+                    {props.team.memberships.length }
+                    {props.team.memberships.length ? " Members" : " Member"}
                 </Button>
                 <Modal
                     open={open}
@@ -85,7 +85,7 @@ function MembersList(props) {
             <h2 id="simple-modal-title">Members list</h2>
             <Typography variant="body2" color="textSecondary" component="p">
                 {
-                    props.teams.members.length !== 0 ? props.teams.members.map((member, index) => {
+                    props.teams.memberships.length !== 0 ? props.teams.memberships.map((member, index) => {
                         return (
                             member.username
                         )
