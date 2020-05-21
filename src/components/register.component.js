@@ -9,7 +9,7 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import {withStyles} from '@material-ui/core/styles';
 import Alert from "@material-ui/lab/Alert";
-import ResponsiveContainerGrid from "./utils/ResponsiveContainer.component";
+import ResponsiveContainerGrid from "../utils/ResponsiveContainer.component";
 
 const useStyles = (theme) => ({
     root: {

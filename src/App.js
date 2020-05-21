@@ -31,6 +31,7 @@ import {Drawer} from "@material-ui/core";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
+import PrivateRoute from "./utils/private.route";
 
 const drawerWidth = 240;
 
@@ -271,9 +272,9 @@ class App extends Component {
                             <Route exact path={["/", "/home"]} component={Home}/>
                             <Route exact path="/login" component={Login}/>
                             <Route exact path="/register" component={Register}/>
-                            <Route exact path="/profile" component={Profile}/>
-                            <Route path="/user" component={BoardUser}/>
-                            <Route path="/teams" component={BoardTeams}/>
+                            <PrivateRoute exact path="/profile" component={Profile}/>
+                            <PrivateRoute path="/user" component={BoardUser}/>
+                            <PrivateRoute path="/teams" component={BoardTeams}/>
                         </Switch>
                     </div>
                 </MuiThemeProvider>

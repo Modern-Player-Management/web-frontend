@@ -7,7 +7,7 @@ import TextField from "@material-ui/core/TextField";
 import Alert from "@material-ui/lab/Alert";
 import Button from "@material-ui/core/Button";
 import CheckButton from "react-validation/build/button";
-import ResponsiveContainerGrid from "../utils/ResponsiveContainer.component";
+import ResponsiveContainerGrid from "../../utils/ResponsiveContainer.component";
 import { withStyles } from "@material-ui/core/styles";
 import CardTeams from "./CardTeams.component";
 import { Typography } from "@material-ui/core";
