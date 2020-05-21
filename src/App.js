@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import React, {Component} from "react";
+import {BrowserRouter as Router, Link, Route, Switch} from "react-router-dom";
+import {createMuiTheme, MuiThemeProvider, withStyles} from '@material-ui/core/styles';
 
 import "./App.css";
 
@@ -15,8 +15,12 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import { withStyles } from '@material-ui/styles';
 import BoardTeams from "./components/teams/Board.component";
+import {AccountCircle} from "@material-ui/icons";
+import IconButton from "@material-ui/core/IconButton";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import MenuIcon from '@material-ui/icons/Menu';
 
 const useStyles = (theme) => ({
     root: {
@@ -24,6 +28,9 @@ const useStyles = (theme) => ({
     },
     title: {
         flexGrow: 1,
+    },
+    menuButton: {
+        marginRight: theme.spacing(2),
     },
 });
 
@@ -44,10 +51,12 @@ class App extends Component {
         super(props);
         this.logOut = this.logOut.bind(this);
         this.state = {
-            showModeratorBoard: false,
-            showAdminBoard: false,
             currentUser: undefined,
+            anchorEl: null,
+            open: false,
         };
+
+        this.handleClick = this.handleClick.bind(this);
     }
 
     componentDidMount() {
@@ -62,32 +71,83 @@ class App extends Component {
 
     logOut() {
         AuthService.logout();
+        window.location.reload();
     }
 
+    flipOpen = () => this.setState({...this.state, open: !this.state.open});
+    handleClick = event => {
+        this.state.ancherEl
+            ? this.setState({anchorEl: null})
+            : this.setState({anchorEl: event.currentTarget});
+        this.flipOpen();
+    };
+
     render() {
-        const { classes } = this.props;
-        const { currentUser } = this.state;
+        const {classes} = this.props;
+        const {currentUser} = this.state;
+        const open = this.state.anchorEl === null ? false : true;
+        const id = this.state.open ? "simple-popper" : null;
+
         return (
             <Router>
                 <MuiThemeProvider theme={theme}>
                     <AppBar position="static">
                         <Toolbar>
+                            {currentUser && (
+                                <IconButton edge="start" className={classes.menuButton} color="inherit"
+                                            aria-label="menu">
+                                    <MenuIcon/>
+                                </IconButton>
+                            )}
+
+
                             <Typography variant="h6" className={classes.title}>
                                 MPM
                             </Typography>
 
                             {currentUser ? (
                                 <>
-                                    <Button href={"/teams"} color="inherit">Teams</Button>
-                                    <Button href={"/profile"} color="inherit">{currentUser.username}</Button>
-                                    <Button href={"/login"} onClick={this.logOut} color="inherit">LogOut</Button>
+                                    <IconButton
+                                        aria-label="account of current user"
+                                        aria-controls="menu-appbar"
+                                        aria-haspopup="true"
+                                        onClick={event => this.handleClick(event)}
+                                        color="inherit"
+                                    >
+                                        <AccountCircle/>
+                                    </IconButton>
+                                    <Menu
+                                        id="menu-appbar"
+                                        anchorEl={this.state.anchorEl}
+                                        open={this.state.open}
+                                        onClose={this.handleClick}
+                                        anchorOrigin={{
+                                            vertical: "top",
+                                            horizontal: "right"
+                                        }}
+                                        keepMounted
+                                        transformOrigin={{
+                                            vertical: "top",
+                                            horizontal: "right"
+                                        }}
+                                    >
+                                        <Link to='/teams' style={{textDecoration: 'none'}}>
+                                            <MenuItem onClick={this.handleClick}>Profile</MenuItem>
+                                        </Link>
+                                        <Link to='/profile' style={{textDecoration: 'none'}}>
+                                            <MenuItem onClick={this.handleClick}>My account</MenuItem>
+                                        </Link>
+                                        <Link onClick={this.logOut} style={{textDecoration: 'none'}}>
+                                            <MenuItem onClick={this.handleClick}>Logout</MenuItem>
+                                        </Link>
+                                    </Menu>
                                 </>
                             ) : (
-                                    <>
-                                        <Button href={"/login"} color="inherit">Login</Button>
-                                        <Button href={"/register"} color="inherit">Sign Up</Button>
-                                    </>
-                                )}
+                                <>
+                                    <Button href={"/login"} color="inherit">Login</Button>
+                                    <Button href={"/register"} color="inherit">Sign Up</Button>
+                                </>
+                            )}
 
 
                         </Toolbar>
@@ -95,12 +155,12 @@ class App extends Component {
 
                     <div className="container mt-3">
                         <Switch>
-                            <Route exact path={["/", "/home"]} component={Home} />
-                            <Route exact path="/login" component={Login} />
-                            <Route exact path="/register" component={Register} />
-                            <Route exact path="/profile" component={Profile} />
-                            <Route path="/user" component={BoardUser} />
-                            <Route path="/teams" component={BoardTeams} />
+                            <Route exact path={["/", "/home"]} component={Home}/>
+                            <Route exact path="/login" component={Login}/>
+                            <Route exact path="/register" component={Register}/>
+                            <Route exact path="/profile" component={Profile}/>
+                            <Route path="/user" component={BoardUser}/>
+                            <Route path="/teams" component={BoardTeams}/>
                         </Switch>
                     </div>
                 </MuiThemeProvider>
