@@ -8,7 +8,7 @@ import Alert from '@material-ui/lab/Alert';
 import TextField from "@material-ui/core/TextField";
 import { withStyles } from '@material-ui/core/styles';
 import Grid from "@material-ui/core/Grid";
-import ResponsiveContainerGrid from "./ResponsiveContainer.component";
+import ResponsiveContainerGrid from "./utils/ResponsiveContainer.component";
 
 
 const useStyles = (theme) => ({
