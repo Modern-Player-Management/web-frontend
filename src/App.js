@@ -4,23 +4,34 @@ import {createMuiTheme, MuiThemeProvider, withStyles} from '@material-ui/core/st
 
 import "./App.css";
 
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import AuthService from "./services/auth.service";
-
-import Login from "./components/login.component";
-import Register from "./components/register.component";
-import Home from "./components/home.component";
-import Profile from "./components/profile.component";
-import BoardUser from "./components/board-user.component";
+import GroupIcon from '@material-ui/icons/Group';
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import BoardTeams from "./components/teams/Board.component";
 import {AccountCircle} from "@material-ui/icons";
+import MenuIcon from "@material-ui/icons/Menu";
+import clsx from "clsx";
 import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
-import MenuIcon from '@material-ui/icons/Menu';
+import Home from "./components/home.component";
+import Register from "./components/register.component";
+import Login from "./components/login.component";
+import Profile from "./components/profile.component";
+import BoardUser from "./components/board-user.component";
+import BoardTeams from "./components/teams/Board.component";
+import List from "@material-ui/core/List";
+import Divider from "@material-ui/core/Divider";
+import {Drawer} from "@material-ui/core";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+
+const drawerWidth = 240;
 
 const useStyles = (theme) => ({
     root: {
@@ -29,9 +40,57 @@ const useStyles = (theme) => ({
     title: {
         flexGrow: 1,
     },
-    menuButton: {
-        marginRight: theme.spacing(2),
+    appBar: {
+        transition: theme.transitions.create(["margin", "width"], {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.leavingScreen
+        })
     },
+    appBarShift: {
+        width: `calc(100% - ${drawerWidth}px)`,
+        marginLeft: drawerWidth,
+        transition: theme.transitions.create(["margin", "width"], {
+            easing: theme.transitions.easing.easeOut,
+            duration: theme.transitions.duration.enteringScreen
+        })
+    },
+    menuButton: {
+        marginRight: theme.spacing(2)
+    },
+    hide: {
+        display: "none"
+    },
+    drawer: {
+        width: drawerWidth,
+        flexShrink: 0
+    },
+    drawerPaper: {
+        width: drawerWidth
+    },
+    drawerHeader: {
+        display: "flex",
+        alignItems: "center",
+        padding: theme.spacing(0, 1),
+        // necessary for content to be below app bar
+        ...theme.mixins.toolbar,
+        justifyContent: "flex-end"
+    },
+    content: {
+        flexGrow: 1,
+        padding: theme.spacing(3),
+        transition: theme.transitions.create("margin", {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.leavingScreen
+        }),
+        marginLeft: -drawerWidth
+    },
+    contentShift: {
+        transition: theme.transitions.create("margin", {
+            easing: theme.transitions.easing.easeOut,
+            duration: theme.transitions.duration.enteringScreen
+        }),
+        marginLeft: 0
+    }
 });
 
 
@@ -54,8 +113,11 @@ class App extends Component {
             currentUser: undefined,
             anchorEl: null,
             open: false,
+            openDrawer: false,
         };
 
+        this.handleDrawerOpen = this.handleDrawerOpen.bind(this);
+        this.handleDrawerClose = this.handleDrawerClose.bind(this);
         this.handleClick = this.handleClick.bind(this);
     }
 
@@ -74,6 +136,7 @@ class App extends Component {
         window.location.reload();
     }
 
+
     flipOpen = () => this.setState({...this.state, open: !this.state.open});
     handleClick = event => {
         this.state.ancherEl
@@ -82,9 +145,20 @@ class App extends Component {
         this.flipOpen();
     };
 
+    handleDrawerOpen() {
+        console.log("tt");
+        this.setState({openDrawer: true});
+    }
+
+    handleDrawerClose() {
+        this.setState({openDrawer: false});
+    }
+
+
     render() {
         const {classes} = this.props;
         const {currentUser} = this.state;
+
 
         return (
             <Router>
@@ -92,8 +166,13 @@ class App extends Component {
                     <AppBar position="static">
                         <Toolbar>
                             {currentUser && (
-                                <IconButton edge="start" className={classes.menuButton} color="inherit"
-                                            aria-label="menu">
+                                <IconButton
+                                    color="inherit"
+                                    aria-label="open drawer"
+                                    onClick={this.handleDrawerOpen}
+                                    edge="start"
+                                    className={clsx(classes.menuButton, this.state.openDrawer && classes.hide)}
+                                >
                                     <MenuIcon/>
                                 </IconButton>
                             )}
@@ -129,13 +208,10 @@ class App extends Component {
                                             horizontal: "right"
                                         }}
                                     >
-                                        <Link to='/teams' style={{textDecoration: 'none'}}>
-                                            <MenuItem onClick={this.handleClick}>Profile</MenuItem>
-                                        </Link>
                                         <Link to='/profile' style={{textDecoration: 'none'}}>
                                             <MenuItem onClick={this.handleClick}>My account</MenuItem>
                                         </Link>
-                                        <Link onClick={this.logOut} style={{textDecoration: 'none'}}>
+                                        <Link onClick={this.logOut} style={{textDecoration: 'none'}} to='/'>
                                             <MenuItem onClick={this.handleClick}>Logout</MenuItem>
                                         </Link>
                                     </Menu>
@@ -150,6 +226,32 @@ class App extends Component {
 
                         </Toolbar>
                     </AppBar>
+                    <Drawer
+                        className={classes.drawer}
+                        variant="persistent"
+                        anchor="left"
+                        open={this.state.openDrawer}
+                        classes={{
+                            paper: classes.drawerPaper,
+                        }}
+                    >
+                        <div className={classes.drawerHeader}>
+                            <IconButton onClick={this.handleDrawerClose}>
+                                {theme.direction === 'ltr' ? <ChevronLeftIcon/> : <ChevronRightIcon/>}
+                            </IconButton>
+                        </div>
+                        <Divider/>
+                        <List>
+                            <Link onClick={this.handleDrawerClose} to='/teams'
+                                  style={{textDecoration: 'inherit', color: 'rgba(0, 0, 0, 0.87)'}}>
+                                <ListItem button key="Manage teams">
+                                    <ListItemIcon><GroupIcon/></ListItemIcon>
+                                    <ListItemText primary="Manage teams"/>
+                                </ListItem>
+                            </Link>
+                        </List>
+                    </Drawer>
+
 
                     <div className="container mt-3">
                         <Switch>
