@@ -85,8 +85,6 @@ class App extends Component {
     render() {
         const {classes} = this.props;
         const {currentUser} = this.state;
-        const open = this.state.anchorEl === null ? false : true;
-        const id = this.state.open ? "simple-popper" : null;
 
         return (
             <Router>
