@@ -7,6 +7,8 @@ import "./App.css";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import AuthService from "./services/auth.service";
+import PersonIcon from '@material-ui/icons/Person';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import GroupIcon from '@material-ui/icons/Group';
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -208,12 +210,24 @@ class App extends Component {
                                             horizontal: "right"
                                         }}
                                     >
-                                        <Link to='/profile' style={{textDecoration: 'none'}}>
-                                            <MenuItem onClick={this.handleClick}>My account</MenuItem>
-                                        </Link>
-                                        <Link onClick={this.logOut} style={{textDecoration: 'none'}} to='/'>
-                                            <MenuItem onClick={this.handleClick}>Logout</MenuItem>
-                                        </Link>
+
+                                        <List>
+                                            <Link onClick={this.handleClick} to='/profile'
+                                                  style={{textDecoration: 'inherit', color: 'rgba(0, 0, 0, 0.87)'}}>
+                                                <ListItem button key=" My account">
+                                                    <ListItemIcon><PersonIcon/></ListItemIcon>
+                                                    <ListItemText primary="My account"/>
+                                                </ListItem>
+                                            </Link>
+
+                                            <Link onClick={this.logOut} to='/'
+                                                  style={{textDecoration: 'inherit', color: 'rgba(0, 0, 0, 0.87)'}}>
+                                                <ListItem button key="Logout">
+                                                    <ListItemIcon><ExitToAppIcon/></ListItemIcon>
+                                                    <ListItemText primary="Logout"/>
+                                                </ListItem>
+                                            </Link>
+                                        </List>
                                     </Menu>
                                 </>
                             ) : (
