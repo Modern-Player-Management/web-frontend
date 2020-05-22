@@ -26,10 +26,10 @@ const useStyles = (theme) => ({
 });
 
 
-class AddMembers extends Component {
+class AddPlayers extends Component {
     constructor(props) {
         super(props);
-        this.handleMember = this.handleMember.bind(this);
+        this.handleplayer = this.handleplayer.bind(this);
         this.onChangeName = this.onChangeName.bind(this);
 
         this.state = {
@@ -44,7 +44,7 @@ class AddMembers extends Component {
         });
     }
 
-    handleMember(e) {
+    handleplayer(e) {
         e.preventDefault();
 
         this.setState({
@@ -55,9 +55,9 @@ class AddMembers extends Component {
         this.form.validateAll();
         if (this.checkBtn.context._errors.length === 0) {
 
-            UserService.addMemberToTeam(this.teamid, this.state.name).then(
+            UserService.addPlayerToTeam(this.teamid, this.state.name).then(
                 () => {
-                    window.location.reload();
+                    //window.location.reload();
                 },
                 error => {
                     const resMessage =
@@ -87,7 +87,7 @@ class AddMembers extends Component {
                 className={classes.root}
                 noValidate
                 autoComplete="off"
-                onSubmit={this.handleMember}
+                onSubmit={this.handleplayer}
                 ref={c => {
                     this.form = c;
                 }}
@@ -96,7 +96,7 @@ class AddMembers extends Component {
                 <TextField
                     id="standard-basic"
                     type="text"
-                    label="Add member"
+                    label="player"
                     name="name"
                     value={this.state.name}
                     onChange={this.onChangeName}
@@ -111,7 +111,7 @@ class AddMembers extends Component {
                     type="submit"
                     variant="contained"
                     color="primary"
-                > Create </Button>
+                > Add </Button>
 
                 <TextField
                     style={{display: "none"}}
@@ -135,4 +135,4 @@ class AddMembers extends Component {
 }
 
 
-export default withStyles(useStyles)(AddMembers);
+export default withStyles(useStyles)(AddPlayers);

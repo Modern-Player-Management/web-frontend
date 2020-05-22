@@ -7,7 +7,9 @@ import React from "react";
 import CardActions from "@material-ui/core/CardActions";
 import Button from "@material-ui/core/Button";
 import Modal from "@material-ui/core/Modal";
-import AddMembers from "./AddMembers.component";
+import AddPlayers from "./AddPlayers.component";
+import List from "@material-ui/core/List";
+import RemovePlayer from "./RemovePlayer.component";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -42,8 +44,9 @@ export default function CardTeams(props) {
         setOpen(false);
     };
 
-
+    console.log(props);
     return (
+
         <Card className={classes.root}>
             <CardHeader
                 title={props.team.name}
@@ -59,8 +62,8 @@ export default function CardTeams(props) {
             </CardContent>
             <CardActions>
                 <Button size="small" color="primary" onClick={handleOpen}>
-                    {props.team.memberships.length }
-                    {props.team.memberships.length ? " Members" : " Member"}
+                    {props.team.players.length}
+                    {props.team.players.length ? " players" : " player"}
                 </Button>
                 <Modal
                     open={open}
@@ -68,7 +71,7 @@ export default function CardTeams(props) {
                     aria-labelledby="simple-modal-title"
                     aria-describedby="simple-modal-description"
                 >
-                    <MembersList paper={classes.paper} teams={props.team}/>
+                    <PlayersList paper={classes.paper} teams={props.team}/>
                 </Modal>
 
                 <Button size="small" color="primary">
@@ -79,20 +82,22 @@ export default function CardTeams(props) {
     )
 }
 
-function MembersList(props) {
+function PlayersList(props) {
     return (
         <div className={props.paper}>
-            <h2 id="simple-modal-title">Members list</h2>
-            <Typography variant="body2" color="textSecondary" component="p">
-                {
-                    props.teams.memberships.length !== 0 ? props.teams.memberships.map((member, index) => {
-                        return (
-                            member.username
-                        )
-                    }) : "There is no member..."
-                }
+            <h2 id="simple-modal-title">players list</h2>
+            <Typography variant="body2" color="textSecondary">
+                <List>
+                    {
+                        props.teams.players.length !== 0 ? props.teams.players.map((player, index) => {
+                            return (
+                                <RemovePlayer name={player.username} teamid={props.teams.id}/>
+                            )
+                        }) : "There is no member..."
+                    }
+                </List>
             </Typography>
-            <AddMembers teamid={props.teams.id}/>
+            <AddPlayers teamid={props.teams.id}/>
         </div>
     )
 }
