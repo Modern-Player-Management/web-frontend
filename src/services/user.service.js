@@ -24,33 +24,29 @@ class UserService {
             ;
     }
 
-    addPlayerToTeam(teamID, playerName) {
-
-        console.log(getPlayerID(playerName));
-
-        return axios.post(API_URL + 'api/Teams/' + teamID + '/player/' + getPlayerID(playerName), {}, {
+    addPlayerToTeam(teamID, playerID) {
+        return axios.post(API_URL + 'api/Teams/' + teamID + '/player/' + playerID, {}, {
                 headers: authHeader(),
             }
         )
             ;
     }
 
-    removePlayerToTeam(teamID, playerName) {
-        return axios.delete(API_URL + 'api/Teams/' + teamID + '/player/' + playerName, {
+    removePlayerToTeam(teamID, playerID) {
+        return axios.delete(API_URL + 'api/Teams/' + teamID + '/player/' + playerID, {
                 headers: authHeader(),
             }
         )
             ;
     }
-}
 
-function getPlayerID(playerName) {
-    axios.get(API_URL + 'api/Users/' + playerName, {headers: authHeader()})
-        .then(response => {
-            this.response = response.data
-            console.log(this.response.id)
-            return this.response.id
-        })
+    getPlayerID(playerName) {
+        return axios.get(API_URL + 'api/Users/' + playerName, {
+                headers: authHeader(),
+            }
+        )
+            ;
+    }
 }
 
 export default new UserService();

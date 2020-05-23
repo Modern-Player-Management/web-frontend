@@ -55,9 +55,26 @@ class AddPlayers extends Component {
         this.form.validateAll();
         if (this.checkBtn.context._errors.length === 0) {
 
-            UserService.addPlayerToTeam(this.teamid, this.state.name).then(
-                () => {
-                    //window.location.reload();
+            UserService.getPlayerID(this.state.name).then(
+                response => {
+                    UserService.addPlayerToTeam(this.teamid, response.data.id).then(
+                        () => {
+                            window.location.reload();
+                        },
+                        error => {
+                            const resMessage =
+                                (error.response &&
+                                    error.response.data &&
+                                    error.response.data.message) ||
+                                error.message ||
+                                error.toString();
+
+                            this.setState({
+                                loading: false,
+                                message: resMessage
+                            });
+                        }
+                    );
                 },
                 error => {
                     const resMessage =

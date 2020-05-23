@@ -41,14 +41,13 @@ class RemovePlayer extends Component {
 
 
     handlePlayer(e) {
-        console.log(this);
         e.preventDefault();
 
         this.setState({
             message: "",
         });
 
-        UserService.removePlayerToTeam(this.props.teamid, this.state.name).then(
+        UserService.removePlayerToTeam(this.props.teamid, this.props.playerid).then(
             () => {
                 window.location.reload();
             },
@@ -76,7 +75,7 @@ class RemovePlayer extends Component {
                     </Avatar>
                 </ListItemAvatar>
                 <ListItemText
-                    primary={this.props.name}
+                    primary={this.props.playername}
                 />
                 <ListItemSecondaryAction>
                     <IconButton edge="end" aria-label="delete" onClick={this.handlePlayer}>

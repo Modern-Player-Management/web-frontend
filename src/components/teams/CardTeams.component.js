@@ -91,7 +91,7 @@ function PlayersList(props) {
                     {
                         props.teams.players.length !== 0 ? props.teams.players.map((player, index) => {
                             return (
-                                <RemovePlayer name={player.username} teamid={props.teams.id}/>
+                                <RemovePlayer playerid={player.id} playername={player.username} teamid={props.teams.id}/>
                             )
                         }) : "There is no member..."
                     }
