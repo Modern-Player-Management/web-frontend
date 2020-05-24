@@ -28,6 +28,7 @@ export default class Profile extends Component {
           <strong>Email:</strong>{" "}
           {currentUser.email}
         </p>
+          {currentUser.token}
       </div>
     );
   }
