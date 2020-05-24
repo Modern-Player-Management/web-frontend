@@ -12,7 +12,7 @@ class UserService {
         return axios.get(API_URL + 'user', {headers: authHeader()});
     }
 
-    getTeamsBoard() {
+    getTeams() {
         return axios.get(API_URL + 'api/Teams', {headers: authHeader()});
     }
 

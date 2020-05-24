@@ -42,7 +42,8 @@ class BoardTeams extends Component {
     }
 
     componentDidMount() {
-        UserService.getTeamsBoard().then(
+
+        UserService.getTeams().then(
             response => {
                 this.setState({
                     content: response.data
