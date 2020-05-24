@@ -100,7 +100,7 @@ function PlayersList(props) {
                     }
                 </List>
             </Typography>
-            <AddPlayers teamid={props.teams.id}/>
+            <AddPlayers teamid={props.team.id}/>
         </div>
     )
 }
