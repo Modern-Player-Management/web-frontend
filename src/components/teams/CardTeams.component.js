@@ -10,6 +10,9 @@ import Modal from "@material-ui/core/Modal";
 import AddPlayers from "./AddPlayers.component";
 import List from "@material-ui/core/List";
 import RemovePlayer from "./RemovePlayer.component";
+import EditIcon from '@material-ui/icons/Edit';
+import PersonIcon from '@material-ui/icons/Person';
+import RemoveTeam from "./RemoveTeam.component";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -61,8 +64,11 @@ export default function CardTeams(props) {
             </CardContent>
             <CardActions>
                 <Button size="small" color="primary" onClick={handleOpen}>
-                    {props.team.players.length}
-                    {props.team.players.length ? " players" : " player"}
+                    {props.team.players.length} <PersonIcon/>
+                </Button>
+                <RemoveTeam teamid={props.team.id}/>
+                <Button size="small" color="primary">
+                    <EditIcon/>
                 </Button>
                 <Modal
                     open={open}
@@ -70,12 +76,10 @@ export default function CardTeams(props) {
                     aria-labelledby="simple-modal-title"
                     aria-describedby="simple-modal-description"
                 >
-                    <PlayersList paper={classes.paper} teams={props.team}/>
+                    <PlayersList paper={classes.paper} team={props.team}/>
                 </Modal>
 
-                <Button size="small" color="primary">
-                    Learn More
-                </Button>
+
             </CardActions>
         </Card>
     )
@@ -88,9 +92,9 @@ function PlayersList(props) {
             <Typography variant="body2" color="textSecondary">
                 <List>
                     {
-                        props.teams.players.length !== 0 ? props.teams.players.map((player, index) => {
+                        props.team.players.length !== 0 ? props.team.players.map((player, index) => {
                             return (
-                                <RemovePlayer playerid={player.id} playername={player.username} teamid={props.teams.id}/>
+                                <RemovePlayer playerid={player.id} playername={player.username} teamid={props.team.id}/>
                             )
                         }) : "There is no member..."
                     }

@@ -3,7 +3,6 @@ import React, {Component} from "react";
 import {withStyles} from "@material-ui/core/styles";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
 import UserService from "../../services/user.service";
 
 
