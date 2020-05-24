@@ -16,8 +16,8 @@ class UserService {
         return axios.get(API_URL + 'api/Teams', {headers: authHeader()});
     }
 
-    createTeams(data) {
-        return axios.post(API_URL + 'api/Teams', {name: data}, {
+    createTeams(name, description) {
+        return axios.post(API_URL + 'api/Teams', {name: name, description: description}, {
                 headers: authHeader(),
             }
         )
