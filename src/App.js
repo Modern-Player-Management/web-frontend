@@ -149,7 +149,6 @@ class App extends Component {
     };
 
     handleDrawerOpen() {
-        console.log("tt");
         this.setState({openDrawer: true});
     }
 
