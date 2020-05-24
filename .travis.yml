@@ -24,7 +24,8 @@ deploy:
   access_key_id: $STAGING_AWS_ACCESS_KEY_ID
   secret_access_key: $STAGING_AWS_SECRET_ACCESS_KEY
   bucket: $STAGING_AWS_S3_BUCKET
-  skip_cleanup: true
   region: eu-west-3
+  acl: public_read
+  local_dir: public
   on:
     branch: develop
