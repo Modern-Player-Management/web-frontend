@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 
 import UserService from "../../services/user.service";
-import Grid from "@material-ui/core/Grid";
 import ResponsiveContainerGrid from "../../utils/ResponsiveContainer.component";
 import {withStyles} from "@material-ui/core/styles";
 import CardTeams from "./CardTeams.component";
