@@ -22,7 +22,7 @@ const useStyles = (theme) => ({
         textAlign: 'center',
     },
     button: {
-        position: 'absolute',
+        position: 'fixed',
         bottom: 0,
         margin: 30,
         right: 0,
