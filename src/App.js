@@ -32,6 +32,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import PrivateRoute from "./utils/private.route";
+import SemiPrivateRoute from "./utils/SemiPrivate.route";
 
 const drawerWidth = 240;
 
@@ -270,8 +271,8 @@ class App extends Component {
                     <div className="container mt-3">
                         <Switch>
                             <Route exact path={["/", "/home"]} component={Home}/>
-                            <Route exact path="/login" component={Login}/>
-                            <Route exact path="/register" component={Register}/>
+                            <SemiPrivateRoute exact path="/login" component={Login}/>
+                            <SemiPrivateRoute exact path="/register" component={Register}/>
                             <PrivateRoute exact path="/profile" component={Profile}/>
                             <PrivateRoute path="/user" component={BoardUser}/>
                             <PrivateRoute path="/teams" component={BoardTeams}/>
