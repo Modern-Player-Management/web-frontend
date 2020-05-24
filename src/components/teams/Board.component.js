@@ -1,17 +1,12 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 
 import UserService from "../../services/user.service";
 import Grid from "@material-ui/core/Grid";
-import Form from "react-validation/build/form";
-import TextField from "@material-ui/core/TextField";
-import Alert from "@material-ui/lab/Alert";
-import Button from "@material-ui/core/Button";
-import CheckButton from "react-validation/build/button";
 import ResponsiveContainerGrid from "../../utils/ResponsiveContainer.component";
-import { withStyles } from "@material-ui/core/styles";
+import {withStyles} from "@material-ui/core/styles";
 import CardTeams from "./CardTeams.component";
-import { Typography } from "@material-ui/core";
-
+import {Typography} from "@material-ui/core";
+import AddTeams from "./AddTeams.component";
 
 const useStyles = (theme) => ({
     root: {
@@ -26,6 +21,12 @@ const useStyles = (theme) => ({
 
     text: {
         textAlign: 'center',
+    },
+    button: {
+        position: 'absolute',
+        bottom: 0,
+        margin: 30,
+        right: 0,
     }
 });
 
@@ -105,7 +106,7 @@ class BoardTeams extends Component {
     }
 
     render() {
-        const { classes } = this.props;
+        const {classes} = this.props;
         return (
             <>
 
@@ -116,52 +117,12 @@ class BoardTeams extends Component {
                     {
                         this.state.content && this.state.content.map((team, index) => {
                             return (
-                                <CardTeams key={index} team={team} />
+                                <CardTeams key={index} team={team}/>
                             )
                         })
                     }
-
-                    <Grid item xs={12} sm={6}>
-
-                        <Form
-                            className={classes.root}
-                            noValidate
-                            autoComplete="off"
-                            onSubmit={this.handleTeams}
-                            ref={c => {
-                                this.form = c;
-                            }}
-                        >
-
-                            <TextField
-                                id="standard-basic"
-                                type="text"
-                                label="Team's name"
-                                name="name"
-                                value={this.state.name}
-                                onChange={this.onChangeName}
-                            />
-
-                            {this.state.message && (
-                                <Alert className={classes.alert} severity="error">{this.state.message}</Alert>
-                            )}
-
-                            <Button
-                                width="auto"
-                                type="submit"
-                                variant="contained"
-                                color="primary"
-                            > Create </Button>
-
-                            <CheckButton
-                                style={{ display: "none" }}
-                                ref={c => {
-                                    this.checkBtn = c;
-                                }}
-                            />
-                        </Form>
-                    </Grid>
                 </ResponsiveContainerGrid>
+                <AddTeams/>
             </>
         );
     }

@@ -44,7 +44,6 @@ export default function CardTeams(props) {
         setOpen(false);
     };
 
-    console.log(props);
     return (
 
         <Card className={classes.root}>
@@ -58,7 +57,7 @@ export default function CardTeams(props) {
                 title={props.team.name}
             /> */}
             <CardContent>
-                desc
+                {props.team.description}
             </CardContent>
             <CardActions>
                 <Button size="small" color="primary" onClick={handleOpen}>
@@ -85,7 +84,7 @@ export default function CardTeams(props) {
 function PlayersList(props) {
     return (
         <div className={props.paper}>
-            <h2 id="simple-modal-title">players list</h2>
+            <h2 id="simple-modal-title">Players list</h2>
             <Typography variant="body2" color="textSecondary">
                 <List>
                     {
