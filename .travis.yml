@@ -26,6 +26,6 @@ deploy:
   bucket: $STAGING_AWS_S3_BUCKET
   region: eu-west-3
   acl: public_read
-  local_dir: public
+  local_dir: build
   on:
     branch: develop
