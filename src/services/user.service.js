@@ -40,6 +40,14 @@ class UserService {
             ;
     }
 
+    removeTeam(teamID) {
+        return axios.delete(API_URL + 'api/Teams/' + teamID , {
+                headers: authHeader(),
+            }
+        )
+            ;
+    }
+
     getPlayerID(playerName) {
         return axios.get(API_URL + 'api/Users/' + playerName, {
                 headers: authHeader(),
