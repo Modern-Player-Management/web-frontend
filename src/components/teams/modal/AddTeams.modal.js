@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 
-import UserService from "../../services/user.service";
+import UserService from "../../../services/user.service";
 import Form from "react-validation/build/form";
 import TextField from "@material-ui/core/TextField";
 import Alert from "@material-ui/lab/Alert";

@@ -4,7 +4,7 @@ import Modal from "@material-ui/core/Modal";
 
 import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
-import AddTeamsModal from "./AddTeamsModal.component";
+import AddTeamsModal from "./modal/AddTeams.modal";
 
 const useStyles = makeStyles((theme) => ({
     root: {
