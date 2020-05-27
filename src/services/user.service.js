@@ -55,6 +55,14 @@ class UserService {
         )
             ;
     }
+
+    updateTeam(teamID, name, description) {
+        return axios.put(API_URL + 'api/Teams/'+teamID, {name: name, description: description}, {
+                headers: authHeader(),
+            }
+        )
+            ;
+    }
 }
 
 export default new UserService();

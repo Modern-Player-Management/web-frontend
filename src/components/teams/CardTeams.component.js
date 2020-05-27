@@ -10,10 +10,9 @@ import Modal from "@material-ui/core/Modal";
 import AddPlayers from "./AddPlayers.component";
 import List from "@material-ui/core/List";
 import RemovePlayer from "./RemovePlayer.component";
-import EditIcon from '@material-ui/icons/Edit';
 import PersonIcon from '@material-ui/icons/Person';
 import RemoveTeam from "./RemoveTeam.component";
-
+import EditTeam from "./EditTeam.component";
 const useStyles = makeStyles((theme) => ({
     root: {
         maxWidth: '26.5vh',
@@ -67,9 +66,7 @@ export default function CardTeams(props) {
                     {props.team.players.length} <PersonIcon/>
                 </Button>
                 <RemoveTeam teamid={props.team.id}/>
-                <Button size="small" color="primary">
-                    <EditIcon/>
-                </Button>
+                <EditTeam team={props.team}/>
                 <Modal
                     open={open}
                     onClose={handleClose}
