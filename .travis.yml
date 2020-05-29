@@ -20,11 +20,11 @@ after_failure:
   - ./send.sh $WEBHOOK_URL
 
 deploy:
-  provider: s3
-  access_key_id: $STAGING_AWS_ACCESS_KEY_ID
-  secret_access_key: $STAGING_AWS_SECRET_ACCESS_KEY
-  bucket: $STAGING_AWS_S3_BUCKET
-  region: eu-west-3
+  provider: gcs
+  access_key_id: $ACCESS_KEY_ID
+  secret_access_key: $SECRET_ACCESS_KEY
+  bucket: $BUCKET
+  #region: eu-west-3
   acl: public_read
   local_dir: build
   skip_cleanup: true
