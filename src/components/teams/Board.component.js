@@ -21,12 +21,6 @@ const useStyles = (theme) => ({
     text: {
         textAlign: 'center',
     },
-    button: {
-        position: 'fixed',
-        bottom: 0,
-        margin: 30,
-        right: 0,
-    }
 });
 
 
