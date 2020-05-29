@@ -1,6 +1,5 @@
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import CardHeader from "@material-ui/core/CardHeader";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Typography from "@material-ui/core/Typography";
 import React from "react";
@@ -13,25 +12,45 @@ import RemovePlayer from "./RemovePlayer.component";
 import PersonIcon from '@material-ui/icons/Person';
 import RemoveTeam from "./RemoveTeam.component";
 import EditTeam from "./EditTeam.component";
+import CardMedia from "@material-ui/core/CardMedia";
+import { useFourThreeCardMediaStyles } from '@mui-treasury/styles/cardMedia/fourThree';
+import { useN04TextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/n04';
+import { useOverShadowStyles } from '@mui-treasury/styles/shadow/over';
+import cx from 'clsx';
+import TextInfoContent from '@mui-treasury/components/content/textInfo';
+
 const useStyles = makeStyles((theme) => ({
     root: {
-        maxWidth: '26.5vh',
-        margin: '8px',
+        maxWidth: 343,
+        borderRadius: 12,
+        padding: 12,
+        margin: 20,
     },
     media: {
-        height: 0,
-        paddingTop: '56.25%', // 16:9
+        borderRadius: 6,
     },
     paper: {
         backgroundColor: theme.palette.background.paper,
         boxShadow: theme.shadows[5],
         padding: theme.spacing(2, 4, 3),
     },
+    actions: {
+        justifyContent: 'center'
+    },
+    modal: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
 }));
 
 
 export default function CardTeams(props) {
     const classes = useStyles();
+
+    const mediaStyles = useFourThreeCardMediaStyles();
+    const textCardContentStyles = useN04TextInfoContentStyles();
+    const shadowStyles = useOverShadowStyles({ inactive: true });
 
     const [open, setOpen] = React.useState(false);
 
@@ -45,20 +64,23 @@ export default function CardTeams(props) {
 
     return (
 
-        <Card className={classes.root}>
-            <CardHeader
+        <Card className={cx(classes.root, shadowStyles.root)}>
+            <CardMedia
+                className={cx(classes.media, mediaStyles.root)}
+                image={props.team.image}
                 title={props.team.name}
-                subheader={props.team.manager.username}
             />
-            {/*             <CardMedia
-                className={classes.media}
-                image="/static/images/cards/paella.jpg"
-                title={props.team.name}
-            /> */}
-            <CardContent>
-                {props.team.description}
+            <CardContent className={classes.content}>
+                <TextInfoContent
+                    classes={textCardContentStyles}
+                    overline={props.team.manager.username}
+                    heading={props.team.name}
+                    body={
+                        props.team.description
+                    }
+                />
             </CardContent>
-            <CardActions>
+            <CardActions className={classes.actions}>
                 <Button size="small" color="primary" onClick={handleOpen}>
                     {props.team.players.length} <PersonIcon/>
                 </Button>

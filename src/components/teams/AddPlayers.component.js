@@ -113,7 +113,7 @@ class AddPlayers extends Component {
                 <TextField
                     id="standard-basic"
                     type="text"
-                    label="player"
+                    label="Player's name"
                     name="name"
                     value={this.state.name}
                     onChange={this.onChangeName}

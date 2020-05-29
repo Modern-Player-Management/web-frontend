@@ -130,7 +130,7 @@ class EditTeamModal extends Component {
                         type="submit"
                         variant="contained"
                         color="primary"
-                    > Create </Button>
+                    > Modify </Button>
 
                     <CheckButton
                         style={{display: "none"}}

@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
         paddingTop: '56.25%', // 16:9
     },
     button: {
-        position: 'absolute',
+        position: 'fixed',
         bottom: 0,
         margin: 30,
         right: 0,
