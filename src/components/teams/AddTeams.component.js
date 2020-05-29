@@ -20,7 +20,12 @@ const useStyles = makeStyles((theme) => ({
         bottom: 0,
         margin: 30,
         right: 0,
-    }
+    },
+    modal: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
 }));
 
 
@@ -49,8 +54,9 @@ export default function AddTeams(props) {
             <Modal
                 open={open}
                 onClose={handleClose}
-                aria-labelledby="simple-modal-title"
-                aria-describedby="simple-modal-description"
+                aria-labelledby="transition-modal-title"
+                aria-describedby="transition-modal-description"
+                className={classes.modal}
             >
                 <AddTeamsModal/>
             </Modal>

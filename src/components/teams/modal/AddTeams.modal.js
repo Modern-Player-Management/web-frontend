@@ -19,14 +19,10 @@ const useStyles = (theme) => ({
         boxSizing: 'border-box',
     },
     paper: {
-        position: 'absolute',
-        width: 400,
         backgroundColor: theme.palette.background.paper,
         boxShadow: theme.shadows[5],
         padding: theme.spacing(2, 4, 3),
-        left: '50%',
-        top: '50%',
-        transform: 'translate(-50%, -50%)',
+        outline: 0
     },
 });
 
