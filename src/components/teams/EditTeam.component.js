@@ -30,7 +30,7 @@ export default function EditTeam(props) {
                 aria-labelledby="simple-modal-title"
                 aria-describedby="simple-modal-description"
             >
-                <EditTeamModal team={props.team}/>
+                <EditTeamModal paper={props.paper} team={props.team}/>
             </Modal>
         </div>
     )

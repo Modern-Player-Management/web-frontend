@@ -93,7 +93,7 @@ const useStyles = (theme) => ({
             duration: theme.transitions.duration.enteringScreen
         }),
         marginLeft: 0
-    }
+    },
 });
 
 
@@ -105,7 +105,7 @@ const theme = createMuiTheme({
         secondary: {
             main: '#2f5daa'
         }
-    }
+    },
 });
 
 class App extends Component {
