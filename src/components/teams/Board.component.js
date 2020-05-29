@@ -104,7 +104,7 @@ class BoardTeams extends Component {
         return (
             <>
 
-                <Typography variant='h6' className={classes.text}>
+                <Typography variant='h5' className={classes.text}>
                     Your teams list:
                 </Typography>
                 <ResponsiveContainerGrid>
