@@ -232,7 +232,7 @@ class App extends Component {
                                 </>
                             ) : (
                                 <>
-                                    <Button href={"/login"} color="inherit">Login</Button>
+                                    <Button href={"/login"} color="inherit">Sign In</Button>
                                     <Button href={"/register"} color="inherit">Sign Up</Button>
                                 </>
                             )}

@@ -1,26 +1,39 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import Form from "react-validation/build/form";
 import CheckButton from "react-validation/build/button";
-
+import CardContent from "@material-ui/core/CardContent";
 import AuthService from "../services/auth.service";
 import Button from "@material-ui/core/Button";
 import Alert from '@material-ui/lab/Alert';
 import TextField from "@material-ui/core/TextField";
-import { withStyles } from '@material-ui/core/styles';
-import Grid from "@material-ui/core/Grid";
-import ResponsiveContainerGrid from "../utils/ResponsiveContainer.component";
-
+import {withStyles} from '@material-ui/core/styles';
+import Card from "@material-ui/core/Card";
+import CardHeader from "@material-ui/core/CardHeader";
+import CardActions from "@material-ui/core/CardActions";
 
 const useStyles = (theme) => ({
     root: {
-        '& > *': {
-            margin: theme.spacing(1),
-            width: "100%",
-            textAlign: 'center',
-        },
+        width: 343,
+        borderRadius: 12,
+        padding: 12,
+        marginTop: 25,
+        textAlign: 'center',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        boxShadow: 'rgba(34, 35, 58, 0.2) 0px 14px 80px',
+        transition: 'all 0.3s ease 0s',
     },
     alert: {
         boxSizing: 'border-box',
+    },
+    actions:{
+        justifyContent: 'center'
+    },
+    textfield:{
+        margin: 10,
+    },
+    button:{
+        width: '45%',
     }
 });
 
@@ -89,29 +102,30 @@ class Login extends Component {
     }
 
     render() {
-        const { classes } = this.props;
+        const {classes} = this.props;
 
 
         return (
+            <Card className={classes.root}>
+                <CardHeader
+                    title="Account Sign in"
+                />
 
-            <ResponsiveContainerGrid>
-                <Grid item xs={12} sm={6}>
-
-                    <Form
-                        className={classes.root}
-                        noValidate
-                        autoComplete="off"
-                        onSubmit={this.handleLogin}
-                        ref={c => {
-                            this.form = c;
-                        }}
-                    >
-
+                <Form
+                    noValidate
+                    autoComplete="off"
+                    onSubmit={this.handleLogin}
+                    ref={c => {
+                        this.form = c;
+                    }}
+                >
+                    <CardContent>
                         <TextField
                             id="standard-basic"
                             type="text"
                             label="Username"
                             name="username"
+                            className={classes.textfield}
                             value={this.state.username}
                             onChange={this.onChangeUsername}
                             required={true}
@@ -122,6 +136,7 @@ class Login extends Component {
                             label="Password"
                             type="password"
                             name="password"
+                            className={classes.textfield}
                             value={this.state.password}
                             onChange={this.onChangePassword}
                             required={true}
@@ -131,23 +146,25 @@ class Login extends Component {
                         {this.state.message && (
                             <Alert className={classes.alert} severity="error">{this.state.message}</Alert>
                         )}
+                    </CardContent>
+                    <CardActions className={classes.actions}>
+                    <Button
+                        className={classes.button}
+                        type="submit"
+                        variant="contained"
+                        color="primary"
+                    > Sign in </Button>
 
-                        <Button
-                            width="auto"
-                            type="submit"
-                            variant="contained"
-                            color="primary"
-                        > Login </Button>
+                    <CheckButton
+                        style={{display: "none"}}
+                        ref={c => {
+                            this.checkBtn = c;
+                        }}
+                    />
+                    </CardActions>
+                </Form>
 
-                        <CheckButton
-                            style={{ display: "none" }}
-                            ref={c => {
-                                this.checkBtn = c;
-                            }}
-                        />
-                    </Form>
-                </Grid>
-            </ResponsiveContainerGrid>
+            </Card>
         );
     }
 }
