@@ -77,7 +77,7 @@ class Login extends Component {
         if (this.checkBtn.context._errors.length === 0) {
             AuthService.login(this.state.username, this.state.password).then(
                 () => {
-                    this.props.history.push("/profile");
+                    this.props.history.push("/teams");
                     window.location.reload();
                 },
                 error => {
