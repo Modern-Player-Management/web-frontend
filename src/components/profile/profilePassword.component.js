@@ -123,7 +123,7 @@ class ProfilePassword extends Component {
                         />
 
                         <TextField
-                            label="Confirm password"
+                            label="Confirm"
                             type="password"
                             className={classes.textfield}
                             name="passwordConfirm"

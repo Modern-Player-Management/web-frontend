@@ -14,7 +14,7 @@ import ProfileUsername from "./profileUsername.component";
 
 const useStyles = (theme) => ({
     root: {
-        width: '50%',
+        width: '60%',
         borderRadius: 12,
         padding: 12,
         marginTop: 25,
