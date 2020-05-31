@@ -1,34 +1,48 @@
 import React, { Component } from "react";
 import AuthService from "../services/auth.service";
+import UserService from "../services/user.service";
 
 export default class Profile extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      currentUser: AuthService.getCurrentUser()
+        content: ""
     };
   }
 
+    componentDidMount() {
+
+        UserService.getPlayer(AuthService.getCurrentUser()).then(
+            response => {
+                this.setState({
+                    content: response.data
+                });
+            },
+            error => {
+                this.setState({
+                    content:
+                        (error.response &&
+                            error.response.data &&
+                            error.response.data.message) ||
+                        error.message ||
+                        error.toString()
+                });
+            }
+        );
+    }
+
+
   render() {
-    const { currentUser } = this.state;
+    const { content } = this.state;
+
+    console.log(content)
 
     return (
       <div className="container">
         <header className="jumbotron">
-          <h3>
-            <strong>{currentUser.username}</strong> Profile
-          </h3>
+sdgdsq
         </header>
-        <p>
-          <strong>Id:</strong>{" "}
-          {currentUser.id}
-        </p>
-        <p>
-          <strong>Email:</strong>{" "}
-          {currentUser.email}
-        </p>
-          {currentUser.token}
       </div>
     );
   }

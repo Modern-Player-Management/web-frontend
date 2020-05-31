@@ -55,7 +55,7 @@ class AddPlayers extends Component {
         this.form.validateAll();
         if (this.checkBtn.context._errors.length === 0) {
 
-            UserService.getPlayerID(this.state.name).then(
+            UserService.getPlayer(this.state.name).then(
                 response => {
                     UserService.addPlayerToTeam(this.teamid, response.data.id).then(
                         () => {

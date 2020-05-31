@@ -48,7 +48,7 @@ class UserService {
             ;
     }
 
-    getPlayerID(playerName) {
+    getPlayer(playerName) {
         return axios.get(API_URL + 'api/Users/' + playerName, {
                 headers: authHeader(),
             }
@@ -63,6 +63,8 @@ class UserService {
         )
             ;
     }
+
+
 }
 
 export default new UserService();
