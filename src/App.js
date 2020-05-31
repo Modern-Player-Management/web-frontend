@@ -21,7 +21,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
 import Register from "./components/register.component";
 import Login from "./components/login.component";
-import Profile from "./components/profile.component";
+import Profile from "./components/profile/profile.component";
 import BoardUser from "./components/board-user.component";
 import BoardTeams from "./components/teams/Board.component";
 import List from "@material-ui/core/List";
@@ -268,7 +268,7 @@ class App extends Component {
 
                     <div className="container mt-3">
                         <Switch>
-                            <Route exact path={["/", "/login"]} component={Login}/>
+                            <SemiPrivateRoute exact path={["/", "/login"]} component={Login}/>
                             <SemiPrivateRoute exact path="/register" component={Register}/>
                             <PrivateRoute exact path="/profile" component={Profile}/>
                             <PrivateRoute path="/user" component={BoardUser}/>

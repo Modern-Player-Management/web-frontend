@@ -105,7 +105,6 @@ class EditTeamModal extends Component {
                 >
 
                     <TextField
-                        id="standard-basic"
                         type="text"
                         label="Name"
                         name="name"
@@ -113,7 +112,6 @@ class EditTeamModal extends Component {
                         onChange={this.onChangeName}
                     />
                     <TextField
-                        id="standard-basic"
                         type="text"
                         label="Description"
                         name="description"

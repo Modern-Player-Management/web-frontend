@@ -1,18 +1,16 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
 import withStyles from "@material-ui/core/styles/withStyles";
+import makeStyles from "@material-ui/core/styles/makeStyles";
 
-function createStyleSheet(param) {
-    return undefined;
-}
 
-const styleSheet = createStyleSheet(theme => ({
+const useStyles = (theme) => ({
     root: {
         [theme.breakpoints.up("sm")]: {
             "min-height": 500
         }
     }
-}));
+});
 
 function ResponsiveContainerGrid(props) {
     const classes = props.classes;
@@ -30,4 +28,4 @@ function ResponsiveContainerGrid(props) {
     );
 }
 
-export default withStyles(styleSheet)(ResponsiveContainerGrid);
+export default withStyles(useStyles)(ResponsiveContainerGrid);
