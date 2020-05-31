@@ -19,7 +19,6 @@ import MenuIcon from "@material-ui/icons/Menu";
 import clsx from "clsx";
 import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
-import Home from "./components/home.component";
 import Register from "./components/register.component";
 import Login from "./components/login.component";
 import Profile from "./components/profile.component";
@@ -181,7 +180,7 @@ class App extends Component {
 
 
                             <Typography variant="h6" className={classes.title}>
-                                MPM
+                                Modern Player Manager
                             </Typography>
 
                             {currentUser ? (
@@ -232,7 +231,7 @@ class App extends Component {
                                 </>
                             ) : (
                                 <>
-                                    <Button href={"/login"} color="inherit">Login</Button>
+                                    <Button href={"/login"} color="inherit">Sign In</Button>
                                     <Button href={"/register"} color="inherit">Sign Up</Button>
                                 </>
                             )}
@@ -269,8 +268,7 @@ class App extends Component {
 
                     <div className="container mt-3">
                         <Switch>
-                            <Route exact path={["/", "/home"]} component={Home}/>
-                            <SemiPrivateRoute exact path="/login" component={Login}/>
+                            <Route exact path={["/", "/login"]} component={Login}/>
                             <SemiPrivateRoute exact path="/register" component={Register}/>
                             <PrivateRoute exact path="/profile" component={Profile}/>
                             <PrivateRoute path="/user" component={BoardUser}/>
