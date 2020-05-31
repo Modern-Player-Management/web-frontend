@@ -143,7 +143,8 @@ class Profile extends Component {
 
     render() {
         const {classes} = this.props;
-        console.log(this.state.username)
+
+
         return (
             <Card className={classes.root}>
                 <CardHeader

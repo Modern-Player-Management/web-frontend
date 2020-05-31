@@ -65,7 +65,7 @@ class UserService {
     }
 
     getProfile() {
-        return axios.get(API_URL + 'profile/', {
+        return axios.get(API_URL + 'api/Users/profile/', {
                 headers: authHeader(),
             }
         )

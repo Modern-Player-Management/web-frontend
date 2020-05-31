@@ -38,13 +38,11 @@ const useStyles = (theme) => ({
 class ProfileUsername extends Component {
     constructor(props) {
         super(props);
-
-        console.log(props)
         this.handleProfile = this.handleProfile.bind(this);
         this.onChangeUsername = this.onChangeUsername.bind(this);
 
         this.state = {
-            username: props.username,
+            username: this.props.username,
             successful: false,
         }
     }
@@ -53,6 +51,15 @@ class ProfileUsername extends Component {
         this.setState({
             username: e.target.value
         });
+    }
+
+
+    componentDidUpdate(prevProps, prevState) {
+        if(prevProps.username !== this.props.username){
+            this.setState({
+                username: this.props.username
+            });
+        }
     }
 
     handleProfile(e) {

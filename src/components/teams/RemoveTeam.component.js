@@ -42,9 +42,6 @@ class DeleteTeam extends Component {
             message: "",
         });
 
-
-        console.log(this.props.id)
-
         UserService.removeTeam(this.props.teamid, this.props.playerid).then(
             () => {
                 window.location.reload();
