@@ -36,34 +36,34 @@ const useStyles = (theme) => ({
 });
 
 
-class ProfileUsername extends Component {
+class ProfileEmail extends Component {
     constructor(props) {
         super(props);
-        this.handleProfile = this.handleProfile.bind(this);
-        this.onChangeUsername = this.onChangeUsername.bind(this);
+        this.handleEmail = this.handleEmail.bind(this);
+        this.onChangeEmail = this.onChangeEmail.bind(this);
 
         this.state = {
-            username: this.props.username,
+            email: this.props.email,
             successful: false,
         }
     }
 
-    onChangeUsername(e) {
+    onChangeEmail(e) {
         this.setState({
-            username: e.target.value
+            email: e.target.value
         });
     }
 
 
     componentDidUpdate(prevProps, prevState) {
-        if(prevProps.username !== this.props.username){
+        if(prevProps.email !== this.props.email){
             this.setState({
-                username: this.props.username
+                email: this.props.email
             });
         }
     }
 
-    handleProfile(e) {
+    handleEmail(e) {
         e.preventDefault();
 
         this.setState({
@@ -73,24 +73,7 @@ class ProfileUsername extends Component {
 
         this.form.validateAll();
         if (this.checkBtn.context._errors.length === 0) {
-            UserService.updateTeam(this.state.id, this.state.name, this.state.description).then(
-                () => {
-                    window.location.reload();
-                },
-                error => {
-                    const resMessage =
-                        (error.response &&
-                            error.response.data &&
-                            error.response.data.message) ||
-                        error.message ||
-                        error.toString();
-
-                    this.setState({
-                        loading: false,
-                        message: resMessage
-                    });
-                }
-            );
+            console.log(this)
         } else {
             this.setState({
                 loading: false
@@ -105,7 +88,7 @@ class ProfileUsername extends Component {
             <Form
                 noValidate
                 autoComplete="off"
-                onSubmit={this.handleRegister}
+                onSubmit={this.handleEmail}
                 ref={c => {
                     this.form = c;
                 }}
@@ -114,11 +97,11 @@ class ProfileUsername extends Component {
                     <>
                         <TextField
                             type="text"
-                            label="Username"
-                            name="username"
+                            label="Email"
+                            name="email"
                             className={classes.textfield}
-                            value={this.state.username}
-                            onChange={this.onChangeUsername}
+                            value={this.state.email}
+                            onChange={this.onChangeEmail}
                             required={true}
                         />
 
@@ -153,4 +136,4 @@ class ProfileUsername extends Component {
 }
 
 
-export default withStyles(useStyles)(ProfileUsername);
+export default withStyles(useStyles)(ProfileEmail);

@@ -180,7 +180,7 @@ class App extends Component {
 
 
                             <Typography variant="h6" className={classes.title}>
-                                Modern Player Manager
+                                MPM
                             </Typography>
 
                             {currentUser ? (

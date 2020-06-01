@@ -13,7 +13,8 @@ import CardActions from "@material-ui/core/CardActions";
 
 const useStyles = (theme) => ({
     root: {
-        width: 343,
+        maxWidth: '90%',
+        width: 'fit-content',
         borderRadius: 12,
         padding: 12,
         marginTop: 25,
@@ -181,6 +182,7 @@ class Register extends Component {
                                     validations={[vusername]}
                                     required={true}
                                 />
+                                <br/>
                                 <TextField
                                     id="standard-basic"
                                     label="Email"
@@ -191,6 +193,7 @@ class Register extends Component {
                                     onChange={this.onChangeEmail}
                                     required={true}
                                 />
+                                <br/>
                                 <TextField
                                     id="standard-basic"
                                     type="password"
@@ -202,6 +205,7 @@ class Register extends Component {
                                     validations={[required, vpassword]}
                                     required={true}
                                 />
+                                <br/>
 
                                 {this.state.message && (
                                     <Alert

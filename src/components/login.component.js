@@ -13,7 +13,8 @@ import CardActions from "@material-ui/core/CardActions";
 
 const useStyles = (theme) => ({
     root: {
-        width: 343,
+        maxWidth: '90%',
+        width: 'fit-content',
         borderRadius: 12,
         padding: 12,
         marginTop: 25,
@@ -130,7 +131,7 @@ class Login extends Component {
                             onChange={this.onChangeUsername}
                             required={true}
                         />
-
+                        <br/>
                         <TextField
                             id="standard-basic"
                             label="Password"
@@ -141,6 +142,7 @@ class Login extends Component {
                             onChange={this.onChangePassword}
                             required={true}
                         />
+                        <br/>
 
 
                         {this.state.message && (
