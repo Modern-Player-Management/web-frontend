@@ -10,7 +10,7 @@ import ProfileEmail from "./profileEmail.component";
 
 const useStyles = (theme) => ({
     root: {
-        maxWidth: '90%',
+        maxWidth: '80%',
         width: 'fit-content',
         borderRadius: 12,
         padding: 12,

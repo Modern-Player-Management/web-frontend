@@ -13,7 +13,7 @@ import CardActions from "@material-ui/core/CardActions";
 
 const useStyles = (theme) => ({
     root: {
-        maxWidth: '90%',
+        maxWidth: '80%',
         width: 'fit-content',
         borderRadius: 12,
         padding: 12,
