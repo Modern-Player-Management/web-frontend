@@ -12,7 +12,7 @@ const useStyles = (theme) => ({
     root: {
         '& > *': {
             margin: theme.spacing(1),
-            width: "100%",
+            width: "80%",
         },
     },
     alert: {
