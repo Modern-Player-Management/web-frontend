@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import UserService from "../../services/user.service";
 import {withStyles} from "@material-ui/core/styles";
 import Form from "react-validation/build/form";
 import TextField from "@material-ui/core/TextField";
