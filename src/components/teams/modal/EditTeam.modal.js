@@ -12,7 +12,7 @@ const useStyles = (theme) => ({
     root: {
         '& > *': {
             margin: theme.spacing(1),
-            width: "80%",
+            width: "100%",
         },
     },
     alert: {
@@ -22,7 +22,8 @@ const useStyles = (theme) => ({
         backgroundColor: theme.palette.background.paper,
         boxShadow: theme.shadows[5],
         padding: theme.spacing(2, 4, 3),
-        outline: 0
+        outline: 0,
+        width: '75%',
     },
 });
 

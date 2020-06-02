@@ -5,7 +5,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 const useStyles = (theme) => ({
     root: {
         [theme.breakpoints.up("sm")]: {
-            "min-height": 500
+            //"min-height": 500
         }
     }
 });

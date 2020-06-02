@@ -7,6 +7,7 @@ import Grid from "@material-ui/core/Grid";
 import ProfilePassword from "./profilePassword.component";
 import ProfileUsername from "./profileUsername.component";
 import ProfileEmail from "./profileEmail.component";
+import ResponsiveContainerGrid from "../../utils/ResponsiveContainer.component";
 
 const useStyles = (theme) => ({
     root: {
@@ -81,18 +82,11 @@ class Profile extends Component {
                 <CardHeader
                     title="Profile"
                 />
-                <Grid container spacing={3}>
-                    <Grid item xs={6}>
+                <ResponsiveContainerGrid>
                         <ProfilePassword/>
-                    </Grid>
-                    <Grid item xs={6}>
                         <ProfileUsername username={this.state.username}/>
-
-                    </Grid>
-                    <Grid item xs={6}>
                         <ProfileEmail email={this.state.email}/>
-                    </Grid>
-                </Grid>
+                </ResponsiveContainerGrid>
             </Card>
         )
     }
