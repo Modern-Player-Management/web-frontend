@@ -3,7 +3,6 @@ import UserService from "../../services/user.service";
 import {withStyles} from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
-import Grid from "@material-ui/core/Grid";
 import ProfilePassword from "./profilePassword.component";
 import ProfileUsername from "./profileUsername.component";
 import ProfileEmail from "./profileEmail.component";
