@@ -6,6 +6,7 @@ import TextField from "@material-ui/core/TextField";
 import Alert from "@material-ui/lab/Alert";
 import Button from "@material-ui/core/Button";
 import CheckButton from "react-validation/build/button";
+import authService from "../../services/auth.service";
 
 
 const useStyles = (theme) => ({
@@ -40,9 +41,9 @@ class ProfilePassword extends Component {
     constructor(props) {
         super(props);
 
-        this.handleProfile = this.handleProfile.bind(this);
-        this.onChangeUsername = this.onChangeUsername.bind(this);
-        this.onChangeEmail = this.onChangeEmail.bind(this);
+        this.handlePassword = this.handlePassword.bind(this);
+        this.onChangePassword = this.onChangePassword.bind(this);
+        this.onChangePasswordConfirm = this.onChangePasswordConfirm.bind(this);
 
         this.state = {
             successful: false,
@@ -51,19 +52,19 @@ class ProfilePassword extends Component {
         }
     }
 
-    onChangeUsername(e) {
+    onChangePassword(e) {
         this.setState({
-            username: e.target.value
+            password: e.target.value
         });
     }
 
-    onChangeEmail(e) {
+    onChangePasswordConfirm(e) {
         this.setState({
-            email: e.target.value
+            passwordConfirm: e.target.value
         });
     }
 
-    handleProfile(e) {
+    handlePassword(e) {
         e.preventDefault();
 
         this.setState({
@@ -72,10 +73,12 @@ class ProfilePassword extends Component {
         });
 
         this.form.validateAll();
-        if (this.checkBtn.context._errors.length === 0) {
-            UserService.updateTeam(this.state.id, this.state.name, this.state.description).then(
+        if ((this.checkBtn.context._errors.length === 0) && (this.state.password === this.state.passwordConfirm)) {
+            var data = { password: this.state.password}
+            UserService.updateUser(data).then(
                 () => {
                     window.location.reload();
+                    //authService.logout();
                 },
                 error => {
                     const resMessage =
@@ -93,7 +96,8 @@ class ProfilePassword extends Component {
             );
         } else {
             this.setState({
-                loading: false
+                loading: false,
+                message: "Passwords don't match",
             });
         }
     }
@@ -105,7 +109,7 @@ class ProfilePassword extends Component {
             <Form
                 noValidate
                 autoComplete="off"
-                onSubmit={this.handleRegister}
+                onSubmit={this.handlePassword}
                 ref={c => {
                     this.form = c;
                 }}
@@ -118,7 +122,7 @@ class ProfilePassword extends Component {
                             className={classes.textfield}
                             name="password"
                             value={this.state.password}
-                            onChange={this.onChangeEmail}
+                            onChange={this.onChangePassword}
                             required={true}
                         />
 
@@ -128,7 +132,7 @@ class ProfilePassword extends Component {
                             className={classes.textfield}
                             name="passwordConfirm"
                             value={this.state.passwordConfirm}
-                            onChange={this.onChangeEmail}
+                            onChange={this.onChangePasswordConfirm}
                             required={true}
                         />
 

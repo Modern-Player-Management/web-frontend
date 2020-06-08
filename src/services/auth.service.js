@@ -34,11 +34,6 @@ class AuthService {
         return JSON.parse(sessionStorage.getItem('user'));
         ;
     }
-
-    getCurrentUserID() {
-        return JSON.parse(sessionStorage.getItem('id'));
-        ;
-    }
 }
 
 export default new AuthService();

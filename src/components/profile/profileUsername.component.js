@@ -6,6 +6,7 @@ import TextField from "@material-ui/core/TextField";
 import Alert from "@material-ui/lab/Alert";
 import Button from "@material-ui/core/Button";
 import CheckButton from "react-validation/build/button";
+import authService from "../../services/auth.service";
 
 const useStyles = (theme) => ({
     root: {
@@ -73,9 +74,11 @@ class ProfileUsername extends Component {
 
         this.form.validateAll();
         if (this.checkBtn.context._errors.length === 0) {
-            UserService.updateTeam(this.state.id, this.state.name, this.state.description).then(
+            var data = { username: this.state.username}
+            console.log(this.state.username)
+            UserService.updateUser(data).then(
                 () => {
-                    window.location.reload();
+                    authService.logout()
                 },
                 error => {
                     const resMessage =
@@ -105,7 +108,7 @@ class ProfileUsername extends Component {
             <Form
                 noValidate
                 autoComplete="off"
-                onSubmit={this.handleRegister}
+                onSubmit={this.handleProfile}
                 ref={c => {
                     this.form = c;
                 }}
