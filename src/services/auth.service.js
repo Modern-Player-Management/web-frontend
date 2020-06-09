@@ -34,6 +34,18 @@ class AuthService {
         return JSON.parse(sessionStorage.getItem('user'));
         ;
     }
+
+    setNewName(name) {
+        let data = JSON.parse(sessionStorage.getItem('user'))
+        data.username = name
+        sessionStorage.setItem("user", JSON.stringify(data));
+    }
+
+    setNewEmail(email) {
+        let data = JSON.parse(sessionStorage.getItem('user'))
+        data.email = email
+        sessionStorage.setItem("user", JSON.stringify(data));
+    }
 }
 
 export default new AuthService();

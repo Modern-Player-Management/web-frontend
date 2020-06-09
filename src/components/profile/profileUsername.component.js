@@ -75,10 +75,16 @@ class ProfileUsername extends Component {
         this.form.validateAll();
         if (this.checkBtn.context._errors.length === 0) {
             var data = { username: this.state.username}
-            console.log(this.state.username)
             UserService.updateUser(data).then(
                 () => {
-                    authService.logout()
+                    authService.setNewName(this.state.username)
+                    this.setState({
+                        username: this.state.username,
+                        message: "Success",
+                        successful: "success",
+                    })
+
+
                 },
                 error => {
                     const resMessage =
@@ -113,8 +119,6 @@ class ProfileUsername extends Component {
                     this.form = c;
                 }}
             >
-                {!this.state.successful && (
-                    <>
                         <TextField
                             type="text"
                             label="Username"
@@ -141,8 +145,6 @@ class ProfileUsername extends Component {
                             type="submit"
                             variant="contained"
                             color="primary">Update</Button>
-                    </>
-                )}
 
                 <CheckButton
                     style={{display: "none"}}
