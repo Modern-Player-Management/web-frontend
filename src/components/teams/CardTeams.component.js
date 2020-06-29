@@ -8,8 +8,6 @@ import TextInfoContent from '@mui-treasury/components/content/textInfo';
 import PlayerList from "./PlayerList.component";
 import {withStyles} from "@material-ui/core/styles";
 import UserService from "../../services/user.service";
-import {PhotoCamera} from "@material-ui/icons";
-import IconButton from "@material-ui/core/IconButton";
 import Button from "@material-ui/core/Button";
 
 const useStyles = (theme) => ({
