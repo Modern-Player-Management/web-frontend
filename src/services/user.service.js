@@ -5,10 +5,6 @@ import authService from './auth.service';
 const API_URL = 'https://api-mpm.herokuapp.com/';
 
 class UserService {
-    getPublicContent() {
-        return axios.get(API_URL + 'all');
-    }
-
     getUserBoard() {
         return axios.get(API_URL + 'user', {headers: authHeader()});
     }
@@ -57,8 +53,9 @@ class UserService {
             ;
     }
 
-    updateTeam(teamID, name, description) {
-        return axios.put(API_URL + 'api/Teams/' + teamID, {name: name, description: description}, {
+    updateTeam(teamID, data) {
+        console.log(teamID, data);
+        return axios.put(API_URL + 'api/Teams/' + teamID, data, {
                 headers: authHeader(),
             }
         )
@@ -108,7 +105,15 @@ class UserService {
             ;
     }
 
+    fileUpload(file,teamID) {
+        const data = new FormData()
+        data.append('file', file)
 
+        return axios.post(API_URL + 'api/Files/', data, {
+            headers: authHeader()
+        }).then(response => this.updateTeam(teamID, {image:response.data.id}));
+            ;
+    }
 }
 
 export default new UserService();

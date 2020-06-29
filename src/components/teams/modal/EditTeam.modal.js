@@ -64,7 +64,9 @@ class EditTeamModal extends Component {
 
         this.form.validateAll();
         if (this.checkBtn.context._errors.length === 0) {
-            UserService.updateTeam(this.state.id, this.state.name, this.state.description).then(
+            const data = {name: this.state.name, description: this.state.description};
+
+            UserService.updateTeam(this.state.id, data).then(
                 () => {
                     window.location.reload();
                 },
