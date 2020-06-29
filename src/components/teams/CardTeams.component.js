@@ -9,7 +9,7 @@ import PlayerList from "./PlayerList.component";
 import {withStyles} from "@material-ui/core/styles";
 import UserService from "../../services/user.service";
 import Button from "@material-ui/core/Button";
-
+import VisibilityIcon from "@material-ui/icons/Visibility";
 const useStyles = (theme) => ({
     root: {
         maxWidth: 343,
@@ -30,10 +30,8 @@ const useStyles = (theme) => ({
     },
     actions: {
         justifyContent: 'center',
-        position: 'absolute',
         bottom: '7px',
-        left: '20%',
-
+        left: '12%',
     },
     content: {
         paddingBottom: 45,
@@ -86,7 +84,9 @@ class CardTeams extends Component {
                 <input type="file" id="icon-button-file" className={classes.input} onChange={this.onChange}/>
 
                 {
-                    this.state.image !== "" && <label htmlFor="icon-button-file"><img className={classes.media} src={this.state.image} alt={team.name}/></label>
+                    this.state.image !== "" &&
+                    <label htmlFor="icon-button-file"><img className={classes.media} src={this.state.image}
+                                                           alt={team.name}/></label>
                 }
 
                 <form onSubmit={this.onFormSubmit}>
@@ -104,8 +104,21 @@ class CardTeams extends Component {
                 </CardContent>
                 <CardActions className={classes.actions}>
                     <PlayerList team={team}/>
-                    <RemoveTeam teamid={team.id}/>
-                    <EditTeam team={team}/>
+                    {
+                        team.isCurrentUserManager &&
+                            <>
+                            <RemoveTeam teamid={team.id}/>
+                            <EditTeam team={team}/>
+                        </>
+
+                    }
+
+                    <div>
+                        <Button size="small" color="primary" edge="end" aria-label="delete" href={`/team/${team.id}`}>
+                            <VisibilityIcon/>
+                        </Button>
+                    </div>
+
                 </CardActions>
             </Card>
         )

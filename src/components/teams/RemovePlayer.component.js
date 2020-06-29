@@ -47,7 +47,7 @@ class RemovePlayer extends Component {
             message: "",
         });
 
-        UserService.removePlayerToTeam(this.props.teamid, this.props.playerid).then(
+        UserService.removePlayerToTeam(this.props.team.id, this.props.playerid).then(
             () => {
                 window.location.reload();
             },
@@ -77,11 +77,17 @@ class RemovePlayer extends Component {
                 <ListItemText
                     primary={this.props.playername}
                 />
-                <ListItemSecondaryAction>
-                    <IconButton edge="end" aria-label="delete" onClick={this.handlePlayer}>
-                        <DeleteIcon/>
-                    </IconButton>
-                </ListItemSecondaryAction>
+                {
+                    this.props.team.isCurrentUserManager &&
+                        <>
+                            <ListItemSecondaryAction>
+                                <IconButton edge="end" aria-label="delete" onClick={this.handlePlayer}>
+                                    <DeleteIcon/>
+                                </IconButton>
+                            </ListItemSecondaryAction>
+                        </>
+                }
+
             </ListItem>
         );
     }

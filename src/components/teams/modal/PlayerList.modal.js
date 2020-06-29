@@ -5,6 +5,7 @@ import AddPlayers from "../AddPlayers.component";
 import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
 import RemovePlayer from "../RemovePlayer.component";
+import CardActions from "@material-ui/core/CardActions";
 
 const useStyles = (theme) => ({
     root: {
@@ -47,13 +48,16 @@ class PlayerListModal extends Component {
                             team.players.length !== 0 ? team.players.map((player, index) => {
                                 return (
                                     <RemovePlayer playerid={player.id} playername={player.username}
-                                                  teamid={team.id}/>
+                                                  team={team}/>
                                 )
                             }) : "There is no member..."
                         }
                     </List>
                 </Typography>
-                <AddPlayers teamid={team.id}/>
+                {
+                    team.isCurrentUserManager &&
+                        <AddPlayers teamid={team.id}/>
+                }
             </div>
         );
     }

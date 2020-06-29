@@ -7,6 +7,7 @@ import CardTeams from "./CardTeams.component";
 import {Typography} from "@material-ui/core";
 import AddTeams from "./AddTeams.component";
 
+
 const useStyles = (theme) => ({
     root: {
         '& > *': {
@@ -101,6 +102,7 @@ class BoardTeams extends Component {
 
     render() {
         const {classes} = this.props;
+
         return (
             <>
 

@@ -13,6 +13,10 @@ class UserService {
         return axios.get(API_URL + 'api/Teams', {headers: authHeader()});
     }
 
+    getTeam(teamID) {
+        return axios.get(API_URL + 'api/Teams/'+teamID, {headers: authHeader()});
+    }
+
     createTeams(name, description) {
         return axios.post(API_URL + 'api/Teams', {name: name, description: description}, {
                 headers: authHeader(),
