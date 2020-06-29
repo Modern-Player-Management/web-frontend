@@ -1,11 +1,5 @@
 import React, {Component} from "react";
 
-import UserService from "../../../services/user.service";
-import Form from "react-validation/build/form";
-import TextField from "@material-ui/core/TextField";
-import Alert from "@material-ui/lab/Alert";
-import Button from "@material-ui/core/Button";
-import CheckButton from "react-validation/build/button";
 import {withStyles} from "@material-ui/core/styles";
 import AddPlayers from "../AddPlayers.component";
 import List from "@material-ui/core/List";
@@ -35,6 +29,10 @@ const useStyles = (theme) => ({
 class PlayerListModal extends Component {
     constructor(props) {
         super(props);
+
+        this.state({
+            loading: false,
+        })
     }
 
     render() {

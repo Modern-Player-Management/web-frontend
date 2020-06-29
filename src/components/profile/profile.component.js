@@ -7,6 +7,7 @@ import ProfilePassword from "./profilePassword.component";
 import ProfileUsername from "./profileUsername.component";
 import ProfileEmail from "./profileEmail.component";
 import ResponsiveContainerGrid from "../../utils/ResponsiveContainer.component";
+import ProfileIcal from "./ProfileIcal.component";
 
 const useStyles = (theme) => ({
     root: {
@@ -45,6 +46,7 @@ class Profile extends Component {
         this.state = {
             username: "",
             email: "",
+            calendarSecret: "",
             successful: false,
         }
     }
@@ -56,6 +58,7 @@ class Profile extends Component {
                 this.setState({
                     username: response.data.username,
                     email: response.data.email,
+                    calendarSecret: response.data.calendarSecret,
                 });
             },
             error => {
@@ -82,13 +85,15 @@ class Profile extends Component {
                     title="Profile"
                 />
                 <ResponsiveContainerGrid>
-                        <ProfilePassword/>
-                        <ProfileUsername username={this.state.username}/>
-                        <ProfileEmail email={this.state.email}/>
+                    <ProfilePassword/>
+                    <ProfileUsername username={this.state.username}/>
+                    <ProfileEmail email={this.state.email}/>
+                    <ProfileIcal ical={this.state.calendarSecret}/>
                 </ResponsiveContainerGrid>
             </Card>
         )
     }
 }
+
 //<ProfileEmail email={this.state.email}/>
 export default withStyles(useStyles)(Profile);
