@@ -85,19 +85,13 @@ class CardTeams extends Component {
 
         return (
             <Card className={classes.root}>
+                <input type="file" id="icon-button-file" className={classes.input} onChange={this.onChange}/>
 
                 {
-                    this.state.image !== "" && <img className={classes.media} src={this.state.image} alt={team.name}/>
+                    this.state.image !== "" && <label htmlFor="icon-button-file"><img className={classes.media} src={this.state.image} alt={team.name}/></label>
                 }
 
                 <form onSubmit={this.onFormSubmit}>
-                    <input type="file" id="icon-button-file" className={classes.input} onChange={this.onChange}/>
-                    <label htmlFor="icon-button-file">
-                        <IconButton color="primary" aria-label="upload picture"
-                                    component="span">
-                            <PhotoCamera/>
-                        </IconButton>
-                    </label>
                     <Button variant="contained" color="primary" type="submit">Upload</Button>
                 </form>
 
