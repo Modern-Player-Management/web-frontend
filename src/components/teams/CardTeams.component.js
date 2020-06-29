@@ -4,7 +4,6 @@ import React, {Component} from "react";
 import CardActions from "@material-ui/core/CardActions";
 import RemoveTeam from "./RemoveTeam.component";
 import EditTeam from "./EditTeam.component";
-import CardMedia from "@material-ui/core/CardMedia";
 import TextInfoContent from '@mui-treasury/components/content/textInfo';
 import PlayerList from "./PlayerList.component";
 import {withStyles} from "@material-ui/core/styles";

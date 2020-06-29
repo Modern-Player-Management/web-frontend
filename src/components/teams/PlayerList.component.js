@@ -1,12 +1,9 @@
 import React from "react";
 import Modal from "@material-ui/core/Modal";
 import Button from "@material-ui/core/Button";
-import EditIcon from "@material-ui/icons/Edit";
-import EditTeamModal from "./modal/EditTeam.modal";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import PlayerListModal from "./modal/PlayerList.modal";
 import PersonIcon from "@material-ui/icons/Person";
-import CardActions from "@material-ui/core/CardActions";
 
 const useStyles = makeStyles((theme) => ({
     modal: {
