@@ -75,8 +75,12 @@ class ProfilePassword extends Component {
             var data = { password: this.state.password}
             UserService.updateUser(data).then(
                 () => {
-                    window.location.reload();
+                    //window.location.reload();
                     //authService.logout();
+                    this.setState({
+                        message: "password updated !",
+                        successful: "success",
+                    });
                 },
                 error => {
                     const resMessage =
@@ -112,8 +116,6 @@ class ProfilePassword extends Component {
                     this.form = c;
                 }}
             >
-                {!this.state.successful && (
-                    <>
                         <TextField
                             label="Password"
                             type="password"
@@ -150,8 +152,6 @@ class ProfilePassword extends Component {
                             type="submit"
                             variant="contained"
                             color="primary">Update</Button>
-                    </>
-                )}
 
                 <CheckButton
                     style={{display: "none"}}
