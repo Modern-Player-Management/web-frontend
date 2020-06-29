@@ -8,6 +8,9 @@ import TextInfoContent from '@mui-treasury/components/content/textInfo';
 import PlayerList from "./PlayerList.component";
 import {withStyles} from "@material-ui/core/styles";
 import UserService from "../../services/user.service";
+import {PhotoCamera} from "@material-ui/icons";
+import IconButton from "@material-ui/core/IconButton";
+import Button from "@material-ui/core/Button";
 
 const useStyles = (theme) => ({
     root: {
@@ -23,6 +26,9 @@ const useStyles = (theme) => ({
     media: {
         borderRadius: 6,
         maxWidth: 200
+    },
+    input: {
+        display: 'none',
     },
     actions: {
         justifyContent: 'center',
@@ -55,7 +61,7 @@ class CardTeams extends Component {
     onFormSubmit(e) {
         e.preventDefault() // Stop form submit
         UserService.fileUpload(this.state.file, this.props.team.id).then((response) => {
-            console.log(response.data);
+            window.location.reload();
         })
     }
 
@@ -76,16 +82,23 @@ class CardTeams extends Component {
 
     render() {
         const {classes, team} = this.props;
-        console.log(this.state.image)
+
         return (
             <Card className={classes.root}>
 
                 {
                     this.state.image !== "" && <img className={classes.media} src={this.state.image} alt={team.name}/>
                 }
+
                 <form onSubmit={this.onFormSubmit}>
-                    <input type="file" onChange={this.onChange}/>
-                    <button type="submit">Upload</button>
+                    <input type="file" id="icon-button-file" className={classes.input} onChange={this.onChange}/>
+                    <label htmlFor="icon-button-file">
+                        <IconButton color="primary" aria-label="upload picture"
+                                    component="span">
+                            <PhotoCamera/>
+                        </IconButton>
+                    </label>
+                    <Button variant="contained" color="primary" type="submit">Upload</Button>
                 </form>
 
                 <CardContent className={classes.content}>
