@@ -5,7 +5,6 @@ import AddPlayers from "../AddPlayers.component";
 import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
 import RemovePlayer from "../RemovePlayer.component";
-import CardActions from "@material-ui/core/CardActions";
 
 const useStyles = (theme) => ({
     root: {
