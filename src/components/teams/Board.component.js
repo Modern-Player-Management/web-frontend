@@ -40,7 +40,7 @@ class BoardTeams extends Component {
         UserService.getTeams().then(
             response => {
                 this.setState({
-                    content: response.data
+                    content: response.data,
                 });
             },
             error => {

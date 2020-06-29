@@ -42,7 +42,7 @@ class UserService {
     }
 
     removeTeam(teamID) {
-        return axios.delete(API_URL + 'api/Teams/' + teamID , {
+        return axios.delete(API_URL + 'api/Teams/' + teamID, {
                 headers: authHeader(),
             }
         )
@@ -58,7 +58,7 @@ class UserService {
     }
 
     updateTeam(teamID, name, description) {
-        return axios.put(API_URL + 'api/Teams/'+teamID, {name: name, description: description}, {
+        return axios.put(API_URL + 'api/Teams/' + teamID, {name: name, description: description}, {
                 headers: authHeader(),
             }
         )
@@ -73,11 +73,20 @@ class UserService {
             ;
     }
 
-    updateUser(data){
-        return axios.put(API_URL + 'api/Users/'+authService.getCurrentUser().id, data, {
+    updateUser(data) {
+        return axios.put(API_URL + 'api/Users/' + authService.getCurrentUser().id, data, {
                 headers: authHeader(),
             }
         )
+            ;
+    }
+
+    getImageTeam(teamID) {
+        return axios.get(API_URL + 'api/Files/' + teamID, {
+            responseType: 'arraybuffer',
+            headers: authHeader(),
+        })
+            .then(response => new Buffer(response.data, 'binary').toString('base64'))
             ;
     }
 

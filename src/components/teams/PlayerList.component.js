@@ -4,6 +4,9 @@ import Button from "@material-ui/core/Button";
 import EditIcon from "@material-ui/icons/Edit";
 import EditTeamModal from "./modal/EditTeam.modal";
 import makeStyles from "@material-ui/core/styles/makeStyles";
+import PlayerListModal from "./modal/PlayerList.modal";
+import PersonIcon from "@material-ui/icons/Person";
+import CardActions from "@material-ui/core/CardActions";
 
 const useStyles = makeStyles((theme) => ({
     modal: {
@@ -14,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function EditTeam(props) {
+export default function PlayerList(props) {
     const classes = useStyles();
 
     const [open, setOpen] = React.useState(false);
@@ -30,8 +33,8 @@ export default function EditTeam(props) {
     return (
 
         <div>
-            <Button size="small" color="primary" edge="end" aria-label="delete" onClick={handleOpen}>
-                <EditIcon/>
+            <Button size="small" color="primary" onClick={handleOpen}>
+                {props.team.players.length} <PersonIcon/>
             </Button>
 
             <Modal
@@ -41,7 +44,7 @@ export default function EditTeam(props) {
                 aria-describedby="transition-modal-description"
                 className={classes.modal}
             >
-                <EditTeamModal team={props.team}/>
+                <PlayerListModal team={props.team}/>
             </Modal>
         </div>
     )

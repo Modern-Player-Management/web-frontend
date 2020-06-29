@@ -1,125 +1,94 @@
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import makeStyles from "@material-ui/core/styles/makeStyles";
-import Typography from "@material-ui/core/Typography";
-import React from "react";
+import React, {Component} from "react";
 import CardActions from "@material-ui/core/CardActions";
-import Button from "@material-ui/core/Button";
-import Modal from "@material-ui/core/Modal";
-import AddPlayers from "./AddPlayers.component";
-import List from "@material-ui/core/List";
-import RemovePlayer from "./RemovePlayer.component";
-import PersonIcon from '@material-ui/icons/Person';
 import RemoveTeam from "./RemoveTeam.component";
 import EditTeam from "./EditTeam.component";
 import CardMedia from "@material-ui/core/CardMedia";
-import { useFourThreeCardMediaStyles } from '@mui-treasury/styles/cardMedia/fourThree';
-import { useN04TextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/n04';
-import { useOverShadowStyles } from '@mui-treasury/styles/shadow/over';
-import cx from 'clsx';
 import TextInfoContent from '@mui-treasury/components/content/textInfo';
+import PlayerList from "./PlayerList.component";
+import {withStyles} from "@material-ui/core/styles";
+import UserService from "../../services/user.service";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = (theme) => ({
     root: {
         maxWidth: 343,
         borderRadius: 12,
         padding: 12,
         margin: 25,
         width: '100%',
+        boxShadow: 'rgba(34, 35, 58, 0.2) 0px 14px 80px',
+        transition: 'all 0.3s ease 0s',
+        position: 'relative'
     },
     media: {
         borderRadius: 6,
-    },
-    paper: {
-        backgroundColor: theme.palette.background.paper,
-        boxShadow: theme.shadows[5],
-        padding: theme.spacing(2, 4, 3),
-        maxWidth: '75%',
+        maxWidth: 200
     },
     actions: {
-        justifyContent: 'center'
-    },
-    modal: {
-        display: 'flex',
-        alignItems: 'center',
         justifyContent: 'center',
+        position: 'absolute',
+        bottom: '7px',
+        left: '20%',
+
     },
-}));
+    content: {
+        paddingBottom: 45,
+    }
+});
 
 
-export default function CardTeams(props) {
-    const classes = useStyles();
+class CardTeams extends Component {
 
-    const mediaStyles = useFourThreeCardMediaStyles();
-    const textCardContentStyles = useN04TextInfoContentStyles();
-    const shadowStyles = useOverShadowStyles({ inactive: true });
+    constructor(props) {
+        super(props);
 
-    const [open, setOpen] = React.useState(false);
+        this.state = {
+            content: "",
+            name: "",
+            image: "",
+        };
+    }
 
-    const handleOpen = () => {
-        setOpen(true);
-    };
+    componentDidMount() {
 
-    const handleClose = () => {
-        setOpen(false);
-    };
+        UserService.getImageTeam(this.props.team.image).then(
+            response => {
+                this.setState({
+                    image: "data:image/png;base64," + response,
+                });
+            }
+        );
+    }
 
-    return (
+    render() {
+        const {classes, team} = this.props;
+        console.log(this.state.image!== "");
+        return (
 
-        <Card className={cx(classes.root, shadowStyles.root)}>
-            <CardMedia
-                className={cx(classes.media, mediaStyles.root)}
-                image={props.team.image}
-                title={props.team.name}
-            />
-            <CardContent className={classes.content}>
-                <TextInfoContent
-                    classes={textCardContentStyles}
-                    overline={props.team.manager.username}
-                    heading={props.team.name}
-                    body={
-                        props.team.description
-                    }
-                />
-            </CardContent>
-            <CardActions className={classes.actions}>
-                <Button size="small" color="primary" onClick={handleOpen}>
-                    {props.team.players.length} <PersonIcon/>
-                </Button>
-                <RemoveTeam teamid={props.team.id}/>
-                <EditTeam team={props.team}/>
-                <Modal
-                    open={open}
-                    onClose={handleClose}
-                    aria-labelledby="transition-modal-title"
-                    aria-describedby="transition-modal-description"
-                    className={classes.modal}
-                >
-                    <PlayersList paper={classes.paper} team={props.team}/>
-                </Modal>
+            <Card className={classes.root}>
 
+                {
+                    this.state.image !== "" && <img className={classes.media} src={this.state.image} alt={team.name}/>
+                }
 
-            </CardActions>
-        </Card>
-    )
+                <CardContent className={classes.content}>
+                    <TextInfoContent
+                        overline={team.manager.username}
+                        heading={team.name}
+                        body={
+                            team.description
+                        }
+                    />
+                </CardContent>
+                <CardActions className={classes.actions}>
+                    <PlayerList team={team}/>
+                    <RemoveTeam teamid={team.id}/>
+                    <EditTeam team={team}/>
+                </CardActions>
+            </Card>
+        )
+    }
 }
 
-function PlayersList(props) {
-    return (
-        <div className={props.paper}>
-            <h2 id="simple-modal-title">Players list</h2>
-            <Typography variant="body2" color="textSecondary">
-                <List>
-                    {
-                        props.team.players.length !== 0 ? props.team.players.map((player, index) => {
-                            return (
-                                <RemovePlayer playerid={player.id} playername={player.username} teamid={props.team.id}/>
-                            )
-                        }) : "There is no member..."
-                    }
-                </List>
-            </Typography>
-            <AddPlayers teamid={props.team.id}/>
-        </div>
-    )
-}
+export default withStyles(useStyles)(CardTeams);
