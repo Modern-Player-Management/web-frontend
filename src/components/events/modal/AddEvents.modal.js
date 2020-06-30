@@ -102,7 +102,7 @@ class AddEventsModal extends Component {
 
         if (this.checkBtn.context._errors.length === 0) {
 
-            EventService.createEvent(this.props.teamID, this.state.name, this.state.description, this.state.start, this.state.end, this.state.type) .then(
+            EventService.createEvent(this.props.teamID, this.state.name, this.state.description, this.state.start, this.state.end, this.state.type).then(
                 () => {
                     window.location.reload();
                 },
