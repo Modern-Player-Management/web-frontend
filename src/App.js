@@ -22,7 +22,6 @@ import Menu from "@material-ui/core/Menu";
 import Register from "./components/register.component";
 import Login from "./components/login.component";
 import Profile from "./components/profile/profile.component";
-import BoardUser from "./components/board-user.component";
 import BoardTeams from "./components/teams/Board.component";
 import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
@@ -32,7 +31,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import PrivateRoute from "./utils/private.route";
 import SemiPrivateRoute from "./utils/SemiPrivate.route";
-import TeamView from "./components/teams/TeamView.component";
+import TeamView from "./components/teams";
 
 const drawerWidth = 240;
 
@@ -272,7 +271,6 @@ class App extends Component {
                             <SemiPrivateRoute exact path={["/", "/login"]} component={Login}/>
                             <SemiPrivateRoute exact path="/register" component={Register}/>
                             <PrivateRoute exact path="/profile" component={Profile}/>
-                            <PrivateRoute path="/user" component={BoardUser}/>
                             <PrivateRoute path="/teams" component={BoardTeams}/>
                             <PrivateRoute path="/team/:teamID" component={TeamView}/>
                         </Switch>
