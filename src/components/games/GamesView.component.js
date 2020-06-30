@@ -44,7 +44,7 @@ export class GamesView extends Component {
             <Card className={classes.card}>
                 <CardContent className={classes.content}>
                     <TextInfoContent
-                        heading="Events"
+                        heading="Games"
                     />
                     <List>
 

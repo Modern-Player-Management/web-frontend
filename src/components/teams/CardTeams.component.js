@@ -11,8 +11,6 @@ import TeamService from "../../services/team.service";
 import UserService from "../../services/user.service";
 import Button from "@material-ui/core/Button";
 import VisibilityIcon from "@material-ui/icons/Visibility";
-import IconButton from "@material-ui/core/IconButton";
-import {PhotoCamera} from "@material-ui/icons";
 
 const useStyles = (theme) => ({
     root: {
