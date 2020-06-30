@@ -17,8 +17,6 @@ export class GameAction extends Component {
 
     handleDelete(e){
         e.preventDefault();
-
-        console.log(this.props)
     }
 
     render() {
