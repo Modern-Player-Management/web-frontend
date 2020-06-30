@@ -3,7 +3,7 @@ import React, {Component} from "react";
 import {withStyles} from "@material-ui/core/styles";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Button from "@material-ui/core/Button";
-import UserService from "../../services/user.service";
+import TeamService from "../../services/team.service";
 
 
 const useStyles = (theme) => ({
@@ -42,7 +42,7 @@ class DeleteTeam extends Component {
             message: "",
         });
 
-        UserService.removeTeam(this.props.teamid, this.props.playerid).then(
+        TeamService.removeTeam(this.props.teamid, this.props.playerid).then(
             () => {
                 window.location.reload();
             },

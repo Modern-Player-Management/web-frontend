@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 
+import TeamService from "../../services/team.service";
 import UserService from "../../services/user.service";
 import Form from "react-validation/build/form";
 import TextField from "@material-ui/core/TextField";
@@ -57,7 +58,7 @@ class AddPlayers extends Component {
 
             UserService.getPlayer(this.state.name).then(
                 response => {
-                    UserService.addPlayerToTeam(this.teamid, response.data.id).then(
+                    TeamService.addPlayerToTeam(this.teamid, response.data.id).then(
                         () => {
                             window.location.reload();
                         },

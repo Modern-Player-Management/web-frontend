@@ -4,11 +4,8 @@ import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
 import ListItem from "@material-ui/core/ListItem";
-import EditIcon from '@material-ui/icons/Edit';
 import VisibilityIcon from '@material-ui/icons/Visibility';
-import Switch from "@material-ui/core/Switch";
 import Moment from 'moment';
-import TimerIcon from '@material-ui/icons/Timer';
 
 export class GameAction extends Component {
     constructor(props) {
@@ -44,23 +41,7 @@ export class GameAction extends Component {
                     </IconButton>
                     <IconButton edge="end" aria-label="delete"
                                 onClick={this.handlePlayer}>
-                        <TimerIcon/>
-                    </IconButton>
-
-                    <IconButton edge="end" aria-label="delete"
-                                onClick={this.handlePlayer}>
-                        <EditIcon/>
-                    </IconButton>
-                    <IconButton edge="end" aria-label="delete"
-                                onClick={this.handlePlayer}>
                         <VisibilityIcon/>
-                    </IconButton>
-                    <IconButton edge="end" aria-label="delete"
-                                onClick={this.handlePlayer}>
-                        <Switch
-                            name="checkedA"
-                            inputProps={{'aria-label': 'secondary checkbox'}}
-                        />
                     </IconButton>
                 </ListItemSecondaryAction>
             </ListItem>

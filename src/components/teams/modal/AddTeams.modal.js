@@ -1,12 +1,12 @@
 import React, {Component} from "react";
 
-import UserService from "../../../services/user.service";
 import Form from "react-validation/build/form";
 import TextField from "@material-ui/core/TextField";
 import Alert from "@material-ui/lab/Alert";
 import Button from "@material-ui/core/Button";
 import CheckButton from "react-validation/build/button";
 import {withStyles} from "@material-ui/core/styles";
+import TeamService from "../../../services/team.service";
 
 const useStyles = (theme) => ({
     root: {
@@ -64,7 +64,7 @@ class AddTeamsModal extends Component {
         this.form.validateAll();
 
         if (this.checkBtn.context._errors.length === 0) {
-            UserService.createTeams(this.state.name, this.state.description).then(
+            TeamService.createTeams(this.state.name, this.state.description).then(
                 () => {
                     window.location.reload();
                 },

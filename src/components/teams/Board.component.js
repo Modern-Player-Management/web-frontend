@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 
-import UserService from "../../services/user.service";
+import TeamService from "../../services/team.service";
 import ResponsiveContainerGrid from "../../utils/ResponsiveContainer.component";
 import {withStyles} from "@material-ui/core/styles";
 import CardTeams from "./CardTeams.component";
@@ -38,7 +38,7 @@ class BoardTeams extends Component {
 
     componentDidMount() {
 
-        UserService.getTeams().then(
+        TeamService.getTeams().then(
             response => {
                 this.setState({
                     content: response.data,
@@ -74,7 +74,7 @@ class BoardTeams extends Component {
         this.form.validateAll();
 
         if (this.checkBtn.context._errors.length === 0) {
-            UserService.createTeams(this.state.name).then(
+            TeamService.createTeams(this.state.name).then(
                 () => {
                     this.props.history.push("/teams");
                     window.location.reload();

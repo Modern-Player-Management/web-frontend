@@ -7,9 +7,13 @@ import EditTeam from "./EditTeam.component";
 import TextInfoContent from '@mui-treasury/components/content/textInfo';
 import PlayerList from "./PlayerList.component";
 import {withStyles} from "@material-ui/core/styles";
+import TeamService from "../../services/team.service";
 import UserService from "../../services/user.service";
 import Button from "@material-ui/core/Button";
 import VisibilityIcon from "@material-ui/icons/Visibility";
+import IconButton from "@material-ui/core/IconButton";
+import {PhotoCamera} from "@material-ui/icons";
+
 const useStyles = (theme) => ({
     root: {
         maxWidth: 343,
@@ -65,7 +69,7 @@ class CardTeams extends Component {
 
     componentDidMount() {
 
-        UserService.getImageTeam(this.props.team.image).then(
+        TeamService.getImageTeam(this.props.team.image).then(
             response => {
                 this.setState({
                     image: "data:image/png;base64," + response,
@@ -76,18 +80,15 @@ class CardTeams extends Component {
 
     render() {
         const {classes, team} = this.props;
-
+        console.log(this.state.image)
         return (
             <Card className={classes.root}>
-                <input type="file" id="icon-button-file" className={classes.input} onChange={this.onChange}/>
 
                 {
-                    this.state.image !== "" &&
-                    <label htmlFor="icon-button-file"><img className={classes.media} src={this.state.image}
-                                                           alt={team.name}/></label>
+                    this.state.image !== "" && <img className={classes.media} src={this.state.image} alt={team.name}/>
                 }
-
                 <form onSubmit={this.onFormSubmit}>
+                    <input type="file" id="icon-button-file" onChange={this.onChange}/>
                     <Button variant="contained" color="primary" type="submit">Upload</Button>
                 </form>
 
@@ -104,7 +105,7 @@ class CardTeams extends Component {
                     <PlayerList team={team}/>
                     {
                         team.isCurrentUserManager &&
-                            <>
+                        <>
                             <RemoveTeam teamid={team.id}/>
                             <EditTeam team={team}/>
                         </>
@@ -116,7 +117,6 @@ class CardTeams extends Component {
                             <VisibilityIcon/>
                         </Button>
                     </div>
-
                 </CardActions>
             </Card>
         )

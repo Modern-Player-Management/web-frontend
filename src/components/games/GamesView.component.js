@@ -58,7 +58,7 @@ export class GamesView extends Component {
 
                     </List>
                     <Button variant="contained" color="primary">
-                        Create
+                        Upload
                     </Button>
                 </CardContent>
             </Card>

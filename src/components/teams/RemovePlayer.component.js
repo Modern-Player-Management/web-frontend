@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 
-import UserService from "../../services/user.service";
 import {withStyles} from "@material-ui/core/styles";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
@@ -9,6 +8,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
+import TeamService from "../../services/team.service";
 
 
 const useStyles = (theme) => ({
@@ -47,7 +47,7 @@ class RemovePlayer extends Component {
             message: "",
         });
 
-        UserService.removePlayerToTeam(this.props.team.id, this.props.playerid).then(
+        TeamService.removePlayerToTeam(this.props.team.id, this.props.playerid).then(
             () => {
                 window.location.reload();
             },

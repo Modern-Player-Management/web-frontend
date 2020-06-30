@@ -1,10 +1,10 @@
 import React, {Component} from "react";
-import UserService from "../services/user.service";
 import {withStyles} from "@material-ui/core/styles";
 import ListItemText from "@material-ui/core/ListItemText";
 import ResponsiveContainerGrid from "../utils/ResponsiveContainer.component";
 import EventsView from "./events/EventsView.component";
 import GamesView from "./games/GamesView.component";
+import TeamService from "../services/team.service";
 
 const useStyles = (theme) => ({
     card: {
@@ -38,7 +38,7 @@ export class Teams extends Component {
     }
 
     componentDidMount() {
-        UserService.getTeam(this.state.teamID).then(
+        TeamService.getTeam(this.state.teamID).then(
             response => {
                 this.setState({
                     data: response.data,
