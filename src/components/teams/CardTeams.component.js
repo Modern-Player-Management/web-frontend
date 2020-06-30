@@ -30,8 +30,6 @@ const useStyles = (theme) => ({
     },
     actions: {
         justifyContent: 'center',
-        bottom: '7px',
-        left: '12%',
     },
     content: {
         paddingBottom: 45,
