@@ -3,10 +3,24 @@ import authHeader from './auth-header';
 
 const API_URL = 'https://api-mpm.herokuapp.com/';
 
-class EventsService {
+class EventService {
 
-    removeEvents(eventId) {
+    removeEvent(eventId) {
         return axios.delete(API_URL + 'api/Events/' + eventId, {
+                headers: authHeader(),
+            }
+        )
+            ;
+    }
+
+    createEvent(teamID, name, description, start, end, type) {
+        return axios.post(API_URL + 'api/Teams/' + teamID+'/events',{
+            name: name,
+            description: description,
+            start: start,
+            end: end,
+            type: type,
+            }, {
                 headers: authHeader(),
             }
         )
@@ -14,4 +28,4 @@ class EventsService {
     }
 }
 
-export default new EventsService();
+export default new EventService();
