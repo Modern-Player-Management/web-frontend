@@ -6,6 +6,8 @@ import TextInfoContent from '@mui-treasury/components/content/textInfo';
 import List from "@material-ui/core/List";
 import Button from "@material-ui/core/Button";
 import {EventAction} from "./EventAction.component";
+import Modal from "@material-ui/core/Modal";
+import AddEventsModal from "./modal/AddEvents.modal";
 
 const useStyles = (theme) => ({
     card: {
@@ -25,6 +27,11 @@ const useStyles = (theme) => ({
     text: {
         margin: '25px',
     },
+    modal: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
 });
 
 
@@ -34,8 +41,15 @@ export class EventsView extends Component {
 
         this.state = {
             events: "",
+            modal: false,
         };
+
+        this.handleModal = this.handleModal.bind(this);
     }
+
+    handleModal = () => {
+        this.setState({modal: !this.state.modal})
+    };
 
     render() {
         const {classes, events} = this.props;
@@ -49,17 +63,30 @@ export class EventsView extends Component {
                     <List>
 
                         {
-                            events && events.length !== 0  ? events.map((event, index) => {
+                            events && events.length !== 0 ? events.map((event, index) => {
                                 return (
-                                    <EventAction event={event} key={index}/>
+                                    <EventAction teamID={this.props.teamID} event={event} key={index}/>
                                 )
                             }) : "There is no event..."
                         }
 
                     </List>
-                    <Button variant="contained" color="primary">
+
+
+                    <Button variant="contained" color="primary" onClick={this.handleModal}>
                         Create
                     </Button>
+
+
+                    <Modal
+                        open={this.state.modal}
+                        onClose={this.handleModal}
+                        aria-labelledby="transition-modal-title"
+                        aria-describedby="transition-modal-description"
+                        className={classes.modal}
+                    >
+                        <AddEventsModal teamID={this.props.teamID}/>
+                    </Modal>
                 </CardContent>
             </Card>
         )

@@ -9,6 +9,7 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 import Switch from "@material-ui/core/Switch";
 import Moment from 'moment';
 import TimerIcon from '@material-ui/icons/Timer';
+import EventService from "../../services/event.service";
 
 export class EventAction extends Component {
     constructor(props) {
@@ -21,7 +22,23 @@ export class EventAction extends Component {
     handleDelete(e){
         e.preventDefault();
 
-        console.log(this.props)
+        EventService.removeEvent(this.props.event.id).then(
+            () => {
+                window.location.reload();
+            },
+            error => {
+                const resMessage =
+                    (error.response &&
+                        error.response.data &&
+                        error.response.data.message) ||
+                    error.message ||
+                    error.toString();
+
+                this.setState({
+                    message: resMessage
+                });
+            }
+        );
     }
 
     render() {
