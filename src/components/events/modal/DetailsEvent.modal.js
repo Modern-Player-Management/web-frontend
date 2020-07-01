@@ -25,14 +25,9 @@ const useStyles = (theme) => ({
 });
 
 class DetailsEventModal extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         const {classes, event} = this.props;
-
-        console.log(this.props);
 
         return (
             <div className={classes.root}>
