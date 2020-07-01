@@ -12,8 +12,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 import DateFnsUtils from "@date-io/date-fns";
 
 import {DateTimePicker,MuiPickersUtilsProvider} from "@material-ui/pickers";
-import Moment from "moment";
 import EventService from "../../../services/event.service";
+import Utils from "../../../utils/utils";
 
 const useStyles = (theme) => ({
     root: {
@@ -33,11 +33,6 @@ const useStyles = (theme) => ({
         maxWidth: '75%',
     },
 });
-
-
-function DatetoIso(date){
-    return Moment(date).utc().toISOString();
-}
 
 class AddEventsModal extends Component {
     constructor(props) {
@@ -60,13 +55,13 @@ class AddEventsModal extends Component {
 
     handleDateStartChange(e){
         this.setState({
-            start: DatetoIso(e),
+            start: Utils.DatetoIso(e),
         });
     }
 
     handleDateEndChange(e){
         this.setState({
-            end: DatetoIso(e),
+            end: Utils.DatetoIso(e),
         });
     }
 

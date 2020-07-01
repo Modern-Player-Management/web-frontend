@@ -2,7 +2,7 @@ import React, {Component} from "react";
 
 import {withStyles} from "@material-ui/core/styles";
 import ListItemText from "@material-ui/core/ListItemText";
-import AuthService from "../../../utils/utils";
+import Utils from "../../../utils/utils";
 import Grid from "@material-ui/core/Grid";
 import List from "@material-ui/core/List";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
@@ -34,7 +34,7 @@ class DetailsEventModal extends Component {
                 <h2 id="simple-modal-title">Details event</h2>
 
                 <p>{event.name}</p>
-                <p>{AuthService.IsoToString(event.start)}</p>
+                <p>{Utils.IsoToString(event.start)}</p>
                 <p>{event.description}</p>
                 <p>{event.type}</p>
 

@@ -9,8 +9,10 @@ import {withStyles} from "@material-ui/core/styles";
 import DateFnsUtils from "@date-io/date-fns";
 
 import {DateTimePicker,MuiPickersUtilsProvider} from "@material-ui/pickers";
-import Moment from "moment";
+
+import Utils from "../../../utils/utils";
 import EventService from "../../../services/event.service";
+
 
 const useStyles = (theme) => ({
     root: {
@@ -31,16 +33,15 @@ const useStyles = (theme) => ({
     },
 });
 
-function DatetoIso(date){
-    return Moment(date).utc().toISOString();
-}
-
 class EditEventModal extends Component {
     constructor(props) {
         super(props);
         this.handleTeams = this.handleTeams.bind(this);
         this.onChangeName = this.onChangeName.bind(this);
         this.onChangeDescription = this.onChangeDescription.bind(this);
+        this.handleDateStartChange = this.handleDateStartChange.bind(this);
+        this.handleDateEndChange = this.handleDateEndChange.bind(this);
+
         this.state = {
             content: "",
             name: props.event.name,
@@ -59,14 +60,13 @@ class EditEventModal extends Component {
 
     handleDateStartChange(e){
         this.setState({
-            start: DatetoIso(e),
+            start: Utils.DatetoIso(e),
         });
     }
 
     handleDateEndChange(e){
-        console.log(DatetoIso(e))
         this.setState({
-            end: DatetoIso(e),
+            end: Utils.DatetoIso(e),
         });
     }
 
