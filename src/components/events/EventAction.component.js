@@ -7,13 +7,14 @@ import ListItem from "@material-ui/core/ListItem";
 import EditIcon from '@material-ui/icons/Edit';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import Switch from "@material-ui/core/Switch";
-import Moment from 'moment';
 import TimerIcon from '@material-ui/icons/Timer';
 import EventService from "../../services/event.service"
 import Modal from "@material-ui/core/Modal";
 import {withStyles} from "@material-ui/core/styles";
 import EditEventModal from "./modal/EditEvent.modal";
 import DetailsEventModal from "./modal/DetailsEvent.modal";
+import Utils from "../../utils/utils";
+import TeamService from "../../services/team.service";
 
 const useStyles = (theme) => ({
     modal: {
@@ -29,19 +30,30 @@ class EventAction extends Component {
 
         this.state = {
             modal: false,
-            modalType : null,
+            modalType: null,
+            confirmation: null,
         };
 
         this.handleDelete = this.handleDelete.bind(this);
         this.handleModal = this.handleModal.bind(this);
         this.handleModalEdit = this.handleModalEdit.bind(this);
         this.handleModalDetails = this.handleModalDetails.bind(this);
+        this.handleConfirmation = this.handleConfirmation.bind(this);
     }
 
     handleModal = () => {
         this.setState({
             modal: !this.state.modal,
         })
+    };
+
+    handleConfirmation = (event) => {
+        this.setState({
+            confirmation: event.target.checked
+        })
+        console.log(this.state.confirmation);
+        EventService.confirmPresence(this.props.teamID, !this.state.confirmation)
+
     };
 
     handleModalEdit = () => {
@@ -59,9 +71,7 @@ class EventAction extends Component {
     };
 
 
-
-
-    handleDelete(e){
+    handleDelete(e) {
         e.preventDefault();
 
         EventService.removeEvent(this.props.event.id).then(
@@ -86,14 +96,13 @@ class EventAction extends Component {
     render() {
         const {event, classes} = this.props;
 
-        const date = Moment(event.start);
-        const dateComponent = date.utc().format('YYYY-MM-DD HH:mm:ss');
+        console.log(event);
 
         return (
             <ListItem>
                 <ListItemText
                     primary={event.name}
-                    secondary={dateComponent}
+                    secondary={Utils.IsoToString(event.date)}
                 />
                 <ListItemSecondaryAction>
                     {
@@ -121,7 +130,9 @@ class EventAction extends Component {
                     <IconButton edge="end" aria-label="delete"
                                 onClick={this.handlePlayer}>
                         <Switch
-                            name="checkedA"
+                            checked={this.state.confirmation}
+                            onChange={this.handleConfirmation}
+                            name="confirmation"
                             inputProps={{'aria-label': 'secondary checkbox'}}
                         />
                     </IconButton>
@@ -138,7 +149,7 @@ class EventAction extends Component {
 
                     {
                         {
-                            'edit':  <EditEventModal teamID={this.props.teamID} event={event}/>,
+                            'edit': <EditEventModal teamID={this.props.teamID} event={event}/>,
                             'details': <DetailsEventModal teamID={this.props.teamID} event={event}/>,
                         }[this.state.modalType]
                     }

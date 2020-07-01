@@ -28,6 +28,7 @@ class DetailsEventModal extends Component {
 
     render() {
         const {classes, event} = this.props;
+        console.log(event);
 
         return (
             <div className={classes.root}>
@@ -71,7 +72,7 @@ class DetailsEventModal extends Component {
                                                 primary={discrepancy.username}
                                             />
                                             <ListItemSecondaryAction>
-                                                {discrepancy.delayLength}{discrepancy.reason}{discrepancy.type}
+                                                {discrepancy.reason} {discrepancy.type} : {discrepancy.delayLength}
                                             </ListItemSecondaryAction>
                                         </ListItem>
                                     )
