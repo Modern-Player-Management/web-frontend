@@ -14,7 +14,6 @@ import {withStyles} from "@material-ui/core/styles";
 import EditEventModal from "./modal/EditEvent.modal";
 import DetailsEventModal from "./modal/DetailsEvent.modal";
 import Utils from "../../utils/utils";
-import TeamService from "../../services/team.service";
 
 const useStyles = (theme) => ({
     modal: {
