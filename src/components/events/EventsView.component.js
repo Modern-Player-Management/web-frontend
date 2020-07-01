@@ -5,7 +5,7 @@ import CardContent from "@material-ui/core/CardContent";
 import TextInfoContent from '@mui-treasury/components/content/textInfo';
 import List from "@material-ui/core/List";
 import Button from "@material-ui/core/Button";
-import {EventAction} from "./EventAction.component";
+import EventAction from "./EventAction.component";
 import Modal from "@material-ui/core/Modal";
 import AddEventsModal from "./modal/AddEvents.modal";
 
@@ -65,28 +65,34 @@ export class EventsView extends Component {
                         {
                             events && events.length !== 0 ? events.map((event, index) => {
                                 return (
-                                    <EventAction teamID={this.props.teamID} event={event} key={index}/>
+                                    <EventAction isManager={this.props.isManager} teamID={this.props.teamID} event={event} key={index}/>
                                 )
                             }) : "There is no event..."
                         }
 
                     </List>
 
+                    {
+                        this.props.isManager === true &&
+                            <>
+                        <Button variant="contained" color="primary" onClick={this.handleModal}>
+                            Create
+                        </Button>
 
-                    <Button variant="contained" color="primary" onClick={this.handleModal}>
-                        Create
-                    </Button>
 
-
-                    <Modal
+                        <Modal
                         open={this.state.modal}
                         onClose={this.handleModal}
                         aria-labelledby="transition-modal-title"
                         aria-describedby="transition-modal-description"
                         className={classes.modal}
-                    >
+                        >
                         <AddEventsModal teamID={this.props.teamID}/>
-                    </Modal>
+
+                        </Modal>
+                        </>
+                    }
+
                 </CardContent>
             </Card>
         )

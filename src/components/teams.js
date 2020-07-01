@@ -77,8 +77,8 @@ export class Teams extends Component {
                         />
 
                         <ResponsiveContainerGrid>
-                            <EventsView teamID={data.id} events={data.events}/>
-                            <GamesView teamID={data.id} games={data.games}/>
+                            <EventsView isManager={data.isCurrentUserManager} teamID={data.id} events={data.events}/>
+                            <GamesView isManager={data.isCurrentUserManager} teamID={data.id} games={data.games}/>
                         </ResponsiveContainerGrid>
                     </>
 

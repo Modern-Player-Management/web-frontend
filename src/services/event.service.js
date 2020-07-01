@@ -26,6 +26,20 @@ class EventService {
         )
             ;
     }
+
+    editEvent(eventID, name, description, start, end, type) {
+        return axios.put(API_URL + 'api/Events/' + eventID,{
+                name: name,
+                description: description,
+                start: start,
+                end: end,
+                type: type,
+            }, {
+                headers: authHeader(),
+            }
+        )
+            ;
+    }
 }
 
 export default new EventService();

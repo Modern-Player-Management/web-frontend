@@ -9,14 +9,35 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 import Switch from "@material-ui/core/Switch";
 import Moment from 'moment';
 import TimerIcon from '@material-ui/icons/Timer';
-import EventService from "../../services/event.service";
+import EventService from "../../services/event.service"
+import Modal from "@material-ui/core/Modal";
+import {withStyles} from "@material-ui/core/styles";
+import EditEventModal from "./modal/EditEvent.modal";
 
-export class EventAction extends Component {
+const useStyles = (theme) => ({
+    modal: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+});
+
+class EventAction extends Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            modal: false,
+        };
+
         this.handleDelete = this.handleDelete.bind(this);
+        this.handleModal = this.handleModal.bind(this);
     }
+
+    handleModal = () => {
+        this.setState({modal: !this.state.modal})
+    };
+
 
 
     handleDelete(e){
@@ -42,7 +63,7 @@ export class EventAction extends Component {
     }
 
     render() {
-        const {event} = this.props;
+        const {event, classes} = this.props;
 
         const date = Moment(event.start);
         const dateComponent = date.utc().format('YYYY-MM-DD HH:mm:ss');
@@ -53,21 +74,25 @@ export class EventAction extends Component {
                     primary={event.name}
                     secondary={dateComponent}
                 />
-
                 <ListItemSecondaryAction>
-                    <IconButton edge="end" aria-label="delete"
-                                onClick={this.handleDelete}>
-                        <DeleteIcon/>
-                    </IconButton>
-                    <IconButton edge="end" aria-label="delete"
-                                onClick={this.handlePlayer}>
-                        <TimerIcon/>
-                    </IconButton>
+                    {
+                        this.props.isManager === true &&
+                        <>
+                            <IconButton edge="end" aria-label="delete"
+                                        onClick={this.handleDelete}>
+                                <DeleteIcon/>
+                            </IconButton>
+                            <IconButton edge="end" aria-label="delete"
+                                        onClick={this.handlePlayer}>
+                                <TimerIcon/>
+                            </IconButton>
 
-                    <IconButton edge="end" aria-label="delete"
-                                onClick={this.handlePlayer}>
-                        <EditIcon/>
-                    </IconButton>
+                            <IconButton edge="end" aria-label="edit"
+                                        onClick={this.handleModal}>
+                                <EditIcon/>
+                            </IconButton>
+                        </>
+                    }
                     <IconButton edge="end" aria-label="delete"
                                 onClick={this.handlePlayer}>
                         <VisibilityIcon/>
@@ -80,11 +105,24 @@ export class EventAction extends Component {
                         />
                     </IconButton>
                 </ListItemSecondaryAction>
+
+
+                <Modal
+                    open={this.state.modal}
+                    onClose={this.handleModal}
+                    aria-labelledby="transition-modal-title"
+                    aria-describedby="transition-modal-description"
+                    className={classes.modal}
+                >
+                    <EditEventModal teamID={this.props.teamID} event={event}/>
+
+                </Modal>
             </ListItem>
+
         )
 
     }
 }
 
 
-export default (EventAction);
+export default withStyles(useStyles)(EventAction);
