@@ -87,7 +87,7 @@ export class EventsView extends Component {
                         aria-describedby="transition-modal-description"
                         className={classes.modal}
                         >
-                        <AddEventsModal teamID={this.props.teamID}/>
+                            <AddEventsModal teamID={this.props.teamID}/>
 
                         </Modal>
                         </>

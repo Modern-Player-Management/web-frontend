@@ -13,6 +13,7 @@ import EventService from "../../services/event.service"
 import Modal from "@material-ui/core/Modal";
 import {withStyles} from "@material-ui/core/styles";
 import EditEventModal from "./modal/EditEvent.modal";
+import DetailsEventModal from "./modal/DetailsEvent.modal";
 
 const useStyles = (theme) => ({
     modal: {
@@ -28,15 +29,35 @@ class EventAction extends Component {
 
         this.state = {
             modal: false,
+            modalType : null,
         };
 
         this.handleDelete = this.handleDelete.bind(this);
         this.handleModal = this.handleModal.bind(this);
+        this.handleModalEdit = this.handleModalEdit.bind(this);
+        this.handleModalDetails = this.handleModalDetails.bind(this);
     }
 
     handleModal = () => {
-        this.setState({modal: !this.state.modal})
+        this.setState({
+            modal: !this.state.modal,
+        })
     };
+
+    handleModalEdit = () => {
+        this.handleModal();
+        this.setState({
+            modalType: "edit"
+        })
+    };
+
+    handleModalDetails = () => {
+        this.handleModal();
+        this.setState({
+            modalType: "details"
+        })
+    };
+
 
 
 
@@ -88,13 +109,13 @@ class EventAction extends Component {
                             </IconButton>
 
                             <IconButton edge="end" aria-label="edit"
-                                        onClick={this.handleModal}>
+                                        onClick={this.handleModalEdit}>
                                 <EditIcon/>
                             </IconButton>
                         </>
                     }
-                    <IconButton edge="end" aria-label="delete"
-                                onClick={this.handlePlayer}>
+                    <IconButton edge="end" aria-label="details"
+                                onClick={this.handleModalDetails}>
                         <VisibilityIcon/>
                     </IconButton>
                     <IconButton edge="end" aria-label="delete"
@@ -114,7 +135,13 @@ class EventAction extends Component {
                     aria-describedby="transition-modal-description"
                     className={classes.modal}
                 >
-                    <EditEventModal teamID={this.props.teamID} event={event}/>
+
+                    {
+                        {
+                            'edit':  <EditEventModal teamID={this.props.teamID} event={event}/>,
+                            'details': <DetailsEventModal teamID={this.props.teamID} event={event}/>,
+                        }[this.state.modalType]
+                    }
 
                 </Modal>
             </ListItem>
