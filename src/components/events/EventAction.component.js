@@ -30,7 +30,7 @@ class EventAction extends Component {
         this.state = {
             modal: false,
             modalType: null,
-            confirmation: null,
+            confirmation: this.props.event.currentHasConfirmed,
         };
 
         this.handleDelete = this.handleDelete.bind(this);

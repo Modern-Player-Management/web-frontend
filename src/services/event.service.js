@@ -42,8 +42,8 @@ class EventService {
     }
 
     confirmPresence(eventID, confirm){
-        return axios.post(API_URL + 'api/Events/' + eventID+"/confirm",{
-            confirm: confirm
+        return axios.post(API_URL + 'api/Events/' + eventID+"/presence",{
+            present: confirm
             }, {
                 headers: authHeader(),
             }
