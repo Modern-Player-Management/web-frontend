@@ -5,6 +5,7 @@ import ResponsiveContainerGrid from "../utils/ResponsiveContainer.component";
 import EventsView from "./events/EventsView.component";
 import GamesView from "./games/GamesView.component";
 import TeamService from "../services/team.service";
+import Button from "@material-ui/core/Button";
 
 const useStyles = (theme) => ({
     card: {
@@ -24,6 +25,10 @@ const useStyles = (theme) => ({
     text: {
         margin: '25px',
     },
+    dashboard: {
+        display: 'block',
+        margin: 'auto',
+    }
 });
 
 
@@ -83,6 +88,14 @@ export class Teams extends Component {
                             <EventsView isManager={data.isCurrentUserManager} teamID={data.id} events={data.events}/>
                             <GamesView isManager={data.isCurrentUserManager} teamID={data.id} games={data.games}/>
                         </ResponsiveContainerGrid>
+
+                        <Button
+                            className={classes.dashboard}
+                            width="auto"
+                            type="submit"
+                            variant="contained"
+                            color="primary"
+                        > Show team's stats </Button>
                     </>
 
                 }

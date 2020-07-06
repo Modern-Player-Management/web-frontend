@@ -15,6 +15,7 @@ import EditEventModal from "./modal/EditEvent.modal";
 import DetailsEventModal from "./modal/DetailsEvent.modal";
 import Utils from "../../utils/utils";
 import DelayEventModal from "./modal/DelayEvent.modal";
+import AuthService from "../../services/auth.service";
 
 const useStyles = (theme) => ({
     modal: {
@@ -29,6 +30,7 @@ class EventAction extends Component {
         super(props);
 
         this.state = {
+            event: this.props.event,
             modal: false,
             modalType: null,
             confirmation: this.props.event.currentHasConfirmed,
@@ -53,8 +55,21 @@ class EventAction extends Component {
             confirmation: e.target.checked
         })
 
-        EventService.confirmPresence(this.props.event.id, !this.state.confirmation).then(r =>  window.location.reload());
+        EventService.confirmPresence(this.props.event.id, !this.state.confirmation).then(() =>
+            this.state.event.participations[this.getIndexOfUser(this.state.event.participations)].confirmed = this.state.confirmation,
+        );
     };
+
+
+    getIndexOfUser(e) {
+        for (var i = 0; i < e.length; i++) {
+            if (e[i].userId === AuthService.getCurrentUser().id)
+                return i
+
+        }
+
+        return null
+    }
 
     handleModalEdit = () => {
         this.handleModal();
@@ -157,7 +172,7 @@ class EventAction extends Component {
                     {
                         {
                             'edit': <EditEventModal teamID={this.props.teamID} event={event}/>,
-                            'details': <DetailsEventModal teamID={this.props.teamID} event={event}/>,
+                            'details': <DetailsEventModal teamID={this.props.teamID} event={this.state.event}/>,
                             'delay': <DelayEventModal event={event}/>,
                         }[this.state.modalType]
                     }
