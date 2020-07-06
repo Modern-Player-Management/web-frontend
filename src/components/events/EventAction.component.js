@@ -55,8 +55,13 @@ class EventAction extends Component {
             confirmation: e.target.checked
         })
 
+    const evt = this.state.event
+
         EventService.confirmPresence(this.props.event.id, !this.state.confirmation).then(() =>
-            this.state.event.participations[this.getIndexOfUser(this.state.event.participations)].confirmed = this.state.confirmation,
+            evt.participations[this.getIndexOfUser(evt.participations)].confirmed = this.state.confirmation,
+            this.setState({
+                event: evt,
+            }),
         );
     };
 

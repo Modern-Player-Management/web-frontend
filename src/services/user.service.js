@@ -1,7 +1,6 @@
 import axios from 'axios';
 import authHeader from './auth-header';
 import authService from './auth.service';
-import AuthService from "./auth.service";
 const API_URL = 'https://api-mpm.herokuapp.com/';
 
 class UserService {
