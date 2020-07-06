@@ -14,6 +14,7 @@ import {withStyles} from "@material-ui/core/styles";
 import EditEventModal from "./modal/EditEvent.modal";
 import DetailsEventModal from "./modal/DetailsEvent.modal";
 import Utils from "../../utils/utils";
+import DelayEventModal from "./modal/DelayEvent.modal";
 
 const useStyles = (theme) => ({
     modal: {
@@ -38,6 +39,7 @@ class EventAction extends Component {
         this.handleModalEdit = this.handleModalEdit.bind(this);
         this.handleModalDetails = this.handleModalDetails.bind(this);
         this.handleConfirmation = this.handleConfirmation.bind(this);
+        this.handleModalDelay = this.handleModalDelay.bind(this);
     }
 
     handleModal = () => {
@@ -50,13 +52,21 @@ class EventAction extends Component {
         this.setState({
             confirmation: e.target.checked
         })
-        EventService.confirmPresence(this.props.event.id, !this.state.confirmation)
+
+        EventService.confirmPresence(this.props.event.id, !this.state.confirmation).then(r =>  window.location.reload());
     };
 
     handleModalEdit = () => {
         this.handleModal();
         this.setState({
             modalType: "edit"
+        })
+    };
+
+    handleModalDelay = () => {
+        this.handleModal();
+        this.setState({
+            modalType: "delay"
         })
     };
 
@@ -93,8 +103,6 @@ class EventAction extends Component {
     render() {
         const {event, classes} = this.props;
 
-        console.log(event);
-
         return (
             <ListItem>
                 <ListItemText
@@ -109,10 +117,6 @@ class EventAction extends Component {
                                         onClick={this.handleDelete}>
                                 <DeleteIcon/>
                             </IconButton>
-                            <IconButton edge="end" aria-label="delete"
-                                        onClick={this.handlePlayer}>
-                                <TimerIcon/>
-                            </IconButton>
 
                             <IconButton edge="end" aria-label="edit"
                                         onClick={this.handleModalEdit}>
@@ -120,6 +124,12 @@ class EventAction extends Component {
                             </IconButton>
                         </>
                     }
+
+                    <IconButton edge="end" aria-label="delete"
+                                onClick={this.handleModalDelay}>
+                        <TimerIcon/>
+                    </IconButton>
+
                     <IconButton edge="end" aria-label="details"
                                 onClick={this.handleModalDetails}>
                         <VisibilityIcon/>
@@ -148,6 +158,7 @@ class EventAction extends Component {
                         {
                             'edit': <EditEventModal teamID={this.props.teamID} event={event}/>,
                             'details': <DetailsEventModal teamID={this.props.teamID} event={event}/>,
+                            'delay': <DelayEventModal event={event}/>,
                         }[this.state.modalType]
                     }
 
