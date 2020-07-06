@@ -46,13 +46,11 @@ class EventAction extends Component {
         })
     };
 
-    handleConfirmation = (event) => {
+    handleConfirmation = (e) => {
         this.setState({
-            confirmation: event.target.checked
+            confirmation: e.target.checked
         })
-        console.log(this.state.confirmation);
         EventService.confirmPresence(this.props.event.id, !this.state.confirmation)
-
     };
 
     handleModalEdit = () => {

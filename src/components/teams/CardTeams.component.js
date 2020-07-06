@@ -11,6 +11,7 @@ import TeamService from "../../services/team.service";
 import UserService from "../../services/user.service";
 import Button from "@material-ui/core/Button";
 import VisibilityIcon from "@material-ui/icons/Visibility";
+import teamService from "../../services/team.service";
 
 const useStyles = (theme) => ({
     root: {
@@ -49,16 +50,18 @@ class CardTeams extends Component {
             name: "",
             image: "",
         };
-        this.onFormSubmit = this.onFormSubmit.bind(this)
-        this.onChange = this.onChange.bind(this)
+        this.onFormSubmit = this.onFormSubmit.bind(this);
+        this.onChange = this.onChange.bind(this);
     }
 
 
     onFormSubmit(e) {
         e.preventDefault() // Stop form submit
-        UserService.fileUpload(this.state.file, this.props.team.id).then((response) => {
-            window.location.reload();
-        })
+        UserService.fileUpload(this.state.file).then(
+            response => teamService.updateTeam(this.props.team.id, {image: response.data.id}
+            ).then(
+                response => window.location.reload()
+            ));
     }
 
     onChange(e) {
@@ -78,7 +81,6 @@ class CardTeams extends Component {
 
     render() {
         const {classes, team} = this.props;
-        console.log(this.state.image)
         return (
             <Card className={classes.root}>
 
