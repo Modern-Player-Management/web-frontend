@@ -169,9 +169,10 @@ class AddEventsModal extends Component {
                         value={this.state.type}
                         onChange={this.onChangeType}
                     >
-                        <MenuItem value={0}>Ten</MenuItem>
-                        <MenuItem value={1}>Twenty</MenuItem>
-                        <MenuItem value={2}>Thirty</MenuItem>
+                        <MenuItem value={0}>Scrim</MenuItem>
+                        <MenuItem value={1}>Meeting</MenuItem>
+                        <MenuItem value={2}>Tournament</MenuItem>
+                        <MenuItem value={3}>Coaching</MenuItem>
                     </Select>
 
                     {this.state.message && (
