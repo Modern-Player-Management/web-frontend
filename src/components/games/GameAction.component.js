@@ -5,11 +5,11 @@ import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
 import ListItem from "@material-ui/core/ListItem";
 import VisibilityIcon from '@material-ui/icons/Visibility';
-import Moment from 'moment';
 import GameService from "../../services/game.service";
 import Modal from "@material-ui/core/Modal";
 import DetailsGameModal from "./modal/DetailsGame.modal";
 import {withStyles} from "@material-ui/core/styles";
+import Utils from "../../utils/utils";
 
 const useStyles = (theme) => ({
     modal: {
@@ -75,16 +75,11 @@ class GameAction extends Component {
     render() {
         const {game,classes} = this.props;
 
-        const date = Moment(game.start);
-        const dateComponent = date.utc().format('YYYY-MM-DD HH:mm:ss');
-
-        console.log(game)
-
         return (
             <ListItem>
                 <ListItemText
                     primary={game.name}
-                    secondary={dateComponent}
+                    secondary={Utils.IsoToString(game.date)}
                 />
 
                 <ListItemSecondaryAction>

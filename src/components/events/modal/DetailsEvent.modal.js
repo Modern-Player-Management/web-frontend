@@ -9,6 +9,7 @@ import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItem from "@material-ui/core/ListItem";
 import CloseIcon from '@material-ui/icons/Close';
 import CheckIcon from '@material-ui/icons/Check';
+import EventService from '../../../services/event.service';
 
 const useStyles = (theme) => ({
     root: {
@@ -28,7 +29,6 @@ class DetailsEventModal extends Component {
 
     render() {
         const {classes, event} = this.props;
-        console.log(event);
 
         return (
             <div className={classes.root}>
@@ -37,7 +37,7 @@ class DetailsEventModal extends Component {
                 <p>{event.name}</p>
                 <p>{Utils.IsoToString(event.start)}</p>
                 <p>{event.description}</p>
-                <p>{event.type}</p>
+                <p>{EventService.TypeEvents(event.type)}</p>
 
                 <Grid container spacing={3}>
                     <Grid item xs={12} sm={6}>
@@ -72,7 +72,7 @@ class DetailsEventModal extends Component {
                                                 primary={discrepancy.username}
                                             />
                                             <ListItemSecondaryAction>
-                                                {discrepancy.reason} {discrepancy.type} : {discrepancy.delayLength}
+                                               Reason: {discrepancy.reason} {EventService.TypeDiscrepancy(discrepancy.type)} : {discrepancy.delayLength}
                                             </ListItemSecondaryAction>
                                         </ListItem>
                                     )
