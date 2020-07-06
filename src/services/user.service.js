@@ -1,8 +1,6 @@
 import axios from 'axios';
 import authHeader from './auth-header';
 import authService from './auth.service';
-import teamService from './team.service';
-
 const API_URL = 'https://api-mpm.herokuapp.com/';
 
 class UserService {
@@ -32,16 +30,14 @@ class UserService {
         });
     }
 
-    fileUpload(file,teamID) {
+
+    fileUpload(file) {
         const data = new FormData()
         data.append('file', file)
 
-        console.log(file, teamID);
-
         return axios.post(API_URL + 'api/Files/', data, {
             headers: authHeader()
-        }).then(response => teamService.updateTeam(teamID, {image:response.data.id}));
-            ;
+        });
     }
 
     getPlayer(playerName) {

@@ -6,8 +6,6 @@ import TextInfoContent from '@mui-treasury/components/content/textInfo';
 import List from "@material-ui/core/List";
 import Button from "@material-ui/core/Button";
 import GameAction from "./GameAction.component";
-import UserService from "../../services/user.service";
-import teamService from "../../services/team.service";
 import GameService from "../../services/game.service";
 
 const useStyles = (theme) => ({
