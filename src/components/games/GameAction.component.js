@@ -6,24 +6,79 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import ListItem from "@material-ui/core/ListItem";
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import Moment from 'moment';
+import GameService from "../../services/game.service";
+import Modal from "@material-ui/core/Modal";
+import DetailsGameModal from "./modal/DetailsGame.modal";
+import {withStyles} from "@material-ui/core/styles";
 
-export class GameAction extends Component {
+const useStyles = (theme) => ({
+    modal: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+});
+
+
+
+class GameAction extends Component {
     constructor(props) {
         super(props);
 
         this.handleDelete = this.handleDelete.bind(this);
+
+        this.state = {
+            modal: false,
+            modalType: null,
+        };
+
+        this.handleModalDetails = this.handleModalDetails.bind(this);
+        this.handleModal = this.handleModal.bind(this);
     }
+
+    handleModal = () => {
+        this.setState({
+            modal: !this.state.modal,
+        })
+    };
+
+    handleModalDetails = () => {
+        this.handleModal();
+        this.setState({
+            modalType: "details"
+        })
+    };
 
 
     handleDelete(e){
         e.preventDefault();
+
+        GameService.removeGame(this.props.game.id).then(
+            () => {
+                window.location.reload();
+            },
+            error => {
+                const resMessage =
+                    (error.response &&
+                        error.response.data &&
+                        error.response.data.message) ||
+                    error.message ||
+                    error.toString();
+
+                this.setState({
+                    message: resMessage
+                });
+            }
+        );
     }
 
     render() {
-        const {game} = this.props;
+        const {game,classes} = this.props;
 
         const date = Moment(game.start);
         const dateComponent = date.utc().format('YYYY-MM-DD HH:mm:ss');
+
+        console.log(game)
 
         return (
             <ListItem>
@@ -38,15 +93,33 @@ export class GameAction extends Component {
                         <DeleteIcon/>
                     </IconButton>
                     <IconButton edge="end" aria-label="delete"
-                                onClick={this.handlePlayer}>
+                                onClick={this.handleModalDetails}>
                         <VisibilityIcon/>
                     </IconButton>
                 </ListItemSecondaryAction>
+
+
+                <Modal
+                    open={this.state.modal}
+                    onClose={this.handleModal}
+                    aria-labelledby="transition-modal-title"
+                    aria-describedby="transition-modal-description"
+                    className={classes.modal}
+                >
+
+                    {
+                        {
+                            'details': <DetailsGameModal teamID={this.props.teamID} game={game}/>,
+                        }[this.state.modalType]
+                    }
+
+                </Modal>
+
+
             </ListItem>
         )
 
     }
 }
 
-
-export default (GameAction);
+export default withStyles(useStyles)(GameAction);

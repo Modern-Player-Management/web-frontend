@@ -6,6 +6,9 @@ import TextInfoContent from '@mui-treasury/components/content/textInfo';
 import List from "@material-ui/core/List";
 import Button from "@material-ui/core/Button";
 import GameAction from "./GameAction.component";
+import UserService from "../../services/user.service";
+import teamService from "../../services/team.service";
+import GameService from "../../services/game.service";
 
 const useStyles = (theme) => ({
     card: {
@@ -33,8 +36,24 @@ export class GamesView extends Component {
         super(props);
 
         this.state = {
+
             events: "",
+            file: "",
         };
+        this.onFormSubmit = this.onFormSubmit.bind(this);
+        this.onChange = this.onChange.bind(this);
+    }
+
+    onFormSubmit(e) {
+        e.preventDefault()
+        GameService.addGame(this.props.teamID, {file: this.state.file}).then(
+            () => {
+            window.location.reload();
+        })
+    }
+
+    onChange(e) {
+        this.setState({file: e.target.files[0]})
     }
 
     render() {
@@ -49,7 +68,7 @@ export class GamesView extends Component {
                     <List>
 
                         {
-                            games && games.length !== 0  ? games.map((game, index) => {
+                            games && games.length !== 0 ? games.map((game, index) => {
                                 return (
                                     <GameAction game={game} key={index}/>
                                 )
@@ -57,9 +76,10 @@ export class GamesView extends Component {
                         }
 
                     </List>
-                    <Button variant="contained" color="primary">
-                        Upload
-                    </Button>
+                    <form onSubmit={this.onFormSubmit}>
+                        <input type="file" id="icon-button-file" onChange={this.onChange}/>
+                        <Button variant="contained" color="primary" type="submit">Upload</Button>
+                    </form>
                 </CardContent>
             </Card>
         )
