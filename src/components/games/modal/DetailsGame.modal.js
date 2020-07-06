@@ -38,7 +38,6 @@ class DetailsGameModal extends Component {
 
     render() {
         const {classes, game} = this.props;
-        console.log(game);
 
         return (
             <div className={classes.root}>
