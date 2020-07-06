@@ -50,6 +50,39 @@ class EventService {
         )
             ;
     }
+
+    addDiscrepancy(eventID, type, reason, delayLength){
+        return axios.post(API_URL + 'api/Events/' + eventID+"/discrepancies",{
+            type: type,
+            reason: reason,
+            delayLength: delayLength
+            }, {
+                headers: authHeader(),
+            }
+        )
+            ;
+    }
+
+    TypeEvents(i){
+        if(i === 0){
+            return "Scrim"
+        }
+        else if (i === 1){
+            return "Meeting"
+        }else if (i === 2){
+            return "Tournament"
+        }else{
+            return "Coaching"
+        }
+    }
+
+    TypeDiscrepancy(i){
+        if(i === 0){
+            return "Absence"
+        }else{
+            return "Delay"
+        }
+    }
 }
 
 export default new EventService();
