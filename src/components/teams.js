@@ -67,7 +67,7 @@ export class Teams extends Component {
 
     render() {
         const {classes} = this.props;
-        const {data} = this.state;
+        const {data,teamID} = this.state;
 
 
         console.log(data)
@@ -91,8 +91,8 @@ export class Teams extends Component {
 
                         <Button
                             className={classes.dashboard}
+                            href={`/stats/${teamID}`}
                             width="auto"
-                            type="submit"
                             variant="contained"
                             color="primary"
                         > Show team's stats </Button>

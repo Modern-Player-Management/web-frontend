@@ -32,6 +32,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import PrivateRoute from "./utils/private.route";
 import SemiPrivateRoute from "./utils/SemiPrivate.route";
 import TeamView from "./components/teams";
+import Stats from "./components/stats";
 
 const drawerWidth = 240;
 
@@ -273,6 +274,7 @@ class App extends Component {
                             <PrivateRoute exact path="/profile" component={Profile}/>
                             <PrivateRoute path="/teams" component={BoardTeams}/>
                             <PrivateRoute path="/team/:teamID" component={TeamView}/>
+                            <PrivateRoute path="/stats/:teamID" component={Stats}/>
                         </Switch>
                     </div>
                 </MuiThemeProvider>
