@@ -72,7 +72,7 @@ class DetailsEventModal extends Component {
                                                 primary={discrepancy.username}
                                             />
                                             <ListItemSecondaryAction>
-                                               Reason: {discrepancy.reason} {EventService.TypeDiscrepancy(discrepancy.type)} : {discrepancy.delayLength}
+                                               Reason: {discrepancy.reason} {EventService.TypeDiscrepancy(discrepancy.type)}: {discrepancy.delayLength}min
                                             </ListItemSecondaryAction>
                                         </ListItem>
                                     )

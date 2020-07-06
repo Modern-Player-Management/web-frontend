@@ -9,6 +9,8 @@ import Form from "react-validation/build/form";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import CheckButton from "react-validation/build/button";
+import AuthService from "../../../services/auth.service";
+
 const useStyles = (theme) => ({
     root: {
         '& > *': {
@@ -33,22 +35,34 @@ class DelayEventModal extends Component {
         this.onChangeType = this.onChangeType.bind(this);
         this.handleDelay = this.handleDelay.bind(this);
 
+        const indexUser = this.getIndexOfUser(this.props.event.discrepancies)
+
         this.state = {
-            reason: "",
-            length: "",
-            type:"",
+            reason: this.props.event.discrepancies[indexUser].reason,
+            length: this.props.event.discrepancies[indexUser].delayLength,
+            type: this.props.event.discrepancies[indexUser].type,
+            edit: indexUser,
+            id: this.props.event.discrepancies[indexUser].id
         };
     }
 
-    handleDelay(e){
-        e.preventDefault();
+    getIndexOfUser(e) {
+        for (var i = 0; i < e.length; i++) {
+            if (e[i].userId === AuthService.getCurrentUser().id)
+                return i
 
+        }
+
+        return null
+    }
+
+
+    handleDelay(e) {
+        e.preventDefault();
 
         this.form.validateAll();
 
-        console.log(this);
-
-        if (this.checkBtn.context._errors.length === 0) {
+        if (this.state.indexUser === null) {
 
             EventService.addDiscrepancy(this.props.event.id,
                 this.state.type,
@@ -56,13 +70,29 @@ class DelayEventModal extends Component {
                 this.state.length,
             ).then(
                 () => {
-                    window.location.reload();
+                    this.props.event.discrepancies.push({
+                        delayLength: this.state.length,
+                        reason: this.state.reason,
+                        type: this.state.type,
+                        username: AuthService.getCurrentUser().username,
+                        id: AuthService.getCurrentUser().id
+                    })
                 });
-
-        } else {
-            this.setState({
-                loading: false
-            });
+        }else{
+            EventService.updateDiscrepancy(this.state.id,
+                this.state.type,
+                this.state.reason,
+                this.state.length,
+            ).then(
+                () => {
+                    this.props.event.discrepancies.push({
+                        delayLength: this.state.length,
+                        reason: this.state.reason,
+                        type: this.state.type,
+                        username: AuthService.getCurrentUser().username,
+                        id: AuthService.getCurrentUser().id
+                    })
+                });
         }
     }
 
@@ -73,13 +103,13 @@ class DelayEventModal extends Component {
         });
     }
 
-    onChangeLength(e){
+    onChangeLength(e) {
         this.setState({
             length: Number(e.target.value),
         });
     }
 
-    onChangeType(e){
+    onChangeType(e) {
         this.setState({
             type: e.target.value
         });
@@ -88,7 +118,6 @@ class DelayEventModal extends Component {
 
     render() {
         const {classes} = this.props;
-
         return (
             <div className={classes.paper}>
                 <h2 id="simple-modal-title">Add delay / absences</h2>

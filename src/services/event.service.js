@@ -63,6 +63,19 @@ class EventService {
             ;
     }
 
+    updateDiscrepancy(discrepancyId, type, reason, delayLength, ){
+        return axios.put(API_URL + 'api/Discrepancies/' + discrepancyId,{
+                type: type,
+                reason: reason,
+                delayLength: delayLength
+            }, {
+                headers: authHeader(),
+            }
+        )
+            ;
+    }
+
+
     TypeEvents(i){
         if(i === 0){
             return "Scrim"
