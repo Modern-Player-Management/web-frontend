@@ -51,7 +51,7 @@ class EventAction extends Component {
             confirmation: event.target.checked
         })
         console.log(this.state.confirmation);
-        EventService.confirmPresence(this.props.teamID, !this.state.confirmation)
+        EventService.confirmPresence(this.props.event.id, !this.state.confirmation)
 
     };
 
