@@ -64,6 +64,9 @@ export class Teams extends Component {
         const {classes} = this.props;
         const {data} = this.state;
 
+
+        console.log(data)
+
         return (
             <>
                 {
