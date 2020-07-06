@@ -4,7 +4,6 @@ import ListItemText from "@material-ui/core/ListItemText";
 import StatsService from "../services/stats.service";
 import TeamService from "../services/team.service"
 import {Bar, Doughnut} from "react-chartjs-2";
-import ResponsiveContainerGrid from "../utils/ResponsiveContainer.component";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Grid from "@material-ui/core/Grid";
