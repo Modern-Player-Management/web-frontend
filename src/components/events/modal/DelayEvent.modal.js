@@ -30,20 +30,31 @@ const useStyles = (theme) => ({
 class DelayEventModal extends Component {
     constructor(props) {
         super(props);
+        console.log(props);
         this.onChangeReason = this.onChangeReason.bind(this);
         this.onChangeLength = this.onChangeLength.bind(this);
         this.onChangeType = this.onChangeType.bind(this);
         this.handleDelay = this.handleDelay.bind(this);
 
         const indexUser = this.getIndexOfUser(this.props.event.discrepancies)
+        if(indexUser != null){
+            this.state = {
+                reason: props.event.discrepancies[indexUser].reason,
+                length: props.event.discrepancies[indexUser].delayLength,
+                type: props.event.discrepancies[indexUser].type,
+                edit: indexUser,
+                id: props.event.discrepancies[indexUser].id
+            };
+        }else{
+            this.state = {
+                reason: "",
+                length: "",
+                type: "",
+                id: "",
+                edit: null
+            };
+        }
 
-        this.state = {
-            reason: this.props.event.discrepancies[indexUser].reason,
-            length: this.props.event.discrepancies[indexUser].delayLength,
-            type: this.props.event.discrepancies[indexUser].type,
-            edit: indexUser,
-            id: this.props.event.discrepancies[indexUser].id
-        };
     }
 
     getIndexOfUser(e) {
@@ -62,7 +73,7 @@ class DelayEventModal extends Component {
 
         this.form.validateAll();
 
-        if (this.state.indexUser === null) {
+        if (this.state.edit === null) {
 
             EventService.addDiscrepancy(this.props.event.id,
                 this.state.type,
@@ -79,6 +90,7 @@ class DelayEventModal extends Component {
                     })
                 });
         }else{
+            console.log(this.state.id);
             EventService.updateDiscrepancy(this.state.id,
                 this.state.type,
                 this.state.reason,
@@ -118,6 +130,7 @@ class DelayEventModal extends Component {
 
     render() {
         const {classes} = this.props;
+        console.log(this.props);
         return (
             <div className={classes.paper}>
                 <h2 id="simple-modal-title">Add delay / absences</h2>
